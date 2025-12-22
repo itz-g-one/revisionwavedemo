@@ -4,6 +4,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { CTASection } from "@/components/sections/CTASection";
+import { AnimatedSection, StaggeredChildren } from "@/components/ui/animated-section";
 
 const categories = ["All", "Branding", "Web Design", "Marketing", "Video"];
 
@@ -67,7 +68,7 @@ export default function Portfolio() {
       {/* Hero */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 section-padding">
         <div className="container-wide">
-          <div className="max-w-3xl mx-auto text-center animate-fade-in-up">
+          <AnimatedSection className="max-w-3xl mx-auto text-center">
             <span className="text-primary text-sm font-medium mb-2 inline-block">— Our Work</span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6">
               Projects That Make <span className="text-primary italic">Waves</span>
@@ -75,14 +76,14 @@ export default function Portfolio() {
             <p className="text-lg text-muted-foreground">
               Explore our portfolio of successful projects across branding, web design, marketing, and video.
             </p>
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* Filter */}
       <section className="section-padding pt-0">
         <div className="container-wide">
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
+          <AnimatedSection className="flex flex-wrap justify-center gap-3 mb-12">
             {categories.map((category) => (
               <button
                 key={category}
@@ -96,15 +97,19 @@ export default function Portfolio() {
                 {category}
               </button>
             ))}
-          </div>
+          </AnimatedSection>
 
           {/* Projects Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredProjects.map((project, index) => (
+          <StaggeredChildren
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            animation="scale"
+            staggerDelay={100}
+            key={activeCategory}
+          >
+            {filteredProjects.map((project) => (
               <div
                 key={project.id}
-                className="group cursor-pointer animate-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className="group cursor-pointer"
               >
                 <div className={`${project.color} rounded-2xl aspect-[4/3] relative overflow-hidden`}>
                   <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/60 transition-colors flex items-center justify-center">
@@ -124,19 +129,21 @@ export default function Portfolio() {
                 </div>
               </div>
             ))}
-          </div>
+          </StaggeredChildren>
 
           {/* More Projects CTA */}
-          <div className="text-center mt-12">
+          <AnimatedSection className="text-center mt-12">
             <Button variant="outline" size="lg" asChild>
               <Link to="/contact">Request Full Portfolio</Link>
             </Button>
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* CTA */}
-      <CTASection />
+      <AnimatedSection animation="scale">
+        <CTASection />
+      </AnimatedSection>
 
       {/* Footer */}
       <Footer />
