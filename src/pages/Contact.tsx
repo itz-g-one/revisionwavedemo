@@ -1,0 +1,220 @@
+import { useState } from "react";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+
+const contactInfo = [
+  { icon: Phone, label: "Phone", value: "+1 (555) 123-4567" },
+  { icon: Mail, label: "Email", value: "hello@revisionwave.com" },
+  { icon: MapPin, label: "Address", value: "123 Innovation Drive, San Francisco, CA 94102" },
+];
+
+const socialLinks = [
+  { icon: Facebook, href: "#", label: "Facebook" },
+  { icon: Twitter, href: "#", label: "Twitter" },
+  { icon: Linkedin, href: "#", label: "LinkedIn" },
+  { icon: Instagram, href: "#", label: "Instagram" },
+];
+
+export default function Contact() {
+  const { toast } = useToast();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    // Simulate form submission
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    toast({
+      title: "Message Sent!",
+      description: "We'll get back to you within 24 hours.",
+    });
+
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      subject: "",
+      message: "",
+    });
+    setIsSubmitting(false);
+  };
+
+  return (
+    <div className="min-h-screen bg-background">
+      <Navbar />
+
+      {/* Hero */}
+      <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 section-padding">
+        <div className="container-wide">
+          <div className="max-w-3xl mx-auto text-center animate-fade-in-up">
+            <span className="text-primary text-sm font-medium mb-2 inline-block">— Contact Us</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6">
+              Let's Talk for <span className="text-primary italic">Your</span>
+              <br />
+              <span className="text-primary italic">Next Project</span>
+            </h1>
+            <p className="text-lg text-muted-foreground">
+              Ready to transform your marketing with AI? Get in touch and let's discuss how we can help you grow.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Form Section */}
+      <section className="section-padding pt-0">
+        <div className="container-wide">
+          <div className="grid lg:grid-cols-2 gap-12">
+            {/* Left Column - Contact Info */}
+            <div className="animate-fade-in-up">
+              <div className="space-y-8">
+                {contactInfo.map((item, index) => (
+                  <div key={index} className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                      <item.icon className="w-5 h-5 text-primary" />
+                    </div>
+                    <div>
+                      <div className="text-sm text-muted-foreground mb-1">{item.label}</div>
+                      <div className="font-medium text-foreground">{item.value}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-12">
+                <h3 className="font-bold text-foreground mb-4">Follow Us</h3>
+                <div className="flex gap-3">
+                  {socialLinks.map((social) => (
+                    <a
+                      key={social.label}
+                      href={social.href}
+                      aria-label={social.label}
+                      className="w-10 h-10 rounded-full bg-muted flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"
+                    >
+                      <social.icon className="w-5 h-5" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column - Form */}
+            <div className="bg-off-white rounded-3xl p-8 animate-slide-in-right">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                      Your Name *
+                    </label>
+                    <Input
+                      id="name"
+                      name="name"
+                      placeholder="John Doe"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      className="bg-card border-border"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                      Email *
+                    </label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      placeholder="john@example.com"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      className="bg-card border-border"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
+                      Phone
+                    </label>
+                    <Input
+                      id="phone"
+                      name="phone"
+                      placeholder="+1 (555) 000-0000"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className="bg-card border-border"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
+                      Subject *
+                    </label>
+                    <Input
+                      id="subject"
+                      name="subject"
+                      placeholder="Project inquiry"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      required
+                      className="bg-card border-border"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+                    Your Message *
+                  </label>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    placeholder="Tell us about your project..."
+                    rows={5}
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    className="bg-card border-border resize-none"
+                  />
+                </div>
+
+                <Button
+                  type="submit"
+                  variant="hero"
+                  size="lg"
+                  className="w-full"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Sending..." : "Send Message"}
+                </Button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <Footer />
+    </div>
+  );
+}
