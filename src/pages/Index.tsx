@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { ServiceCard, services } from "@/components/services/ServiceCard";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { CTASection } from "@/components/sections/CTASection";
+import { AnimatedSection, StaggeredChildren } from "@/components/ui/animated-section";
 import heroIllustration from "@/assets/hero-illustration.png";
 
 const brandingSteps = [
@@ -33,7 +34,7 @@ export default function Index() {
         <div className="container-wide">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Column - Text */}
-            <div className="animate-fade-in-up">
+            <AnimatedSection animation="fade-left">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
                 <span className="w-2 h-2 rounded-full bg-primary"></span>
                 Modern Marketing & Branding
@@ -59,44 +60,48 @@ export default function Index() {
                   </Link>
                 </Button>
               </div>
-            </div>
+            </AnimatedSection>
 
             {/* Right Column - Illustration */}
-            <div className="relative animate-slide-in-right">
-              <div className="absolute -top-8 -right-8 w-72 h-72 bg-primary/20 rounded-full blur-3xl"></div>
+            <AnimatedSection animation="fade-right" delay={200}>
               <div className="relative">
-                <div className="absolute top-10 right-10 bg-card rounded-xl shadow-card px-4 py-2 animate-float">
-                  <span className="text-sm font-medium text-foreground">UI/UX Designer</span>
+                <div className="absolute -top-8 -right-8 w-72 h-72 bg-primary/20 rounded-full blur-3xl"></div>
+                <div className="relative">
+                  <div className="absolute top-10 right-10 bg-card rounded-xl shadow-card px-4 py-2 animate-float">
+                    <span className="text-sm font-medium text-foreground">UI/UX Designer</span>
+                  </div>
+                  <div className="absolute bottom-20 left-0 bg-secondary text-secondary-foreground rounded-xl shadow-card px-4 py-2 animate-float-delayed">
+                    <span className="text-sm font-medium">Product Designer</span>
+                  </div>
+                  <img
+                    src={heroIllustration}
+                    alt="AI Marketing Professional"
+                    className="w-full max-w-md mx-auto lg:max-w-lg"
+                  />
                 </div>
-                <div className="absolute bottom-20 left-0 bg-secondary text-secondary-foreground rounded-xl shadow-card px-4 py-2 animate-float-delayed">
-                  <span className="text-sm font-medium">Product Designer</span>
-                </div>
-                <img
-                  src={heroIllustration}
-                  alt="AI Marketing Professional"
-                  className="w-full max-w-md mx-auto lg:max-w-lg"
-                />
               </div>
-            </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
 
       {/* Trust Strip */}
-      <section className="py-6 bg-secondary">
-        <div className="container-wide">
-          <div className="flex flex-wrap items-center justify-center gap-4 text-secondary-foreground">
-            <div className="flex gap-1">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-5 h-5 fill-primary text-primary" />
-              ))}
+      <AnimatedSection animation="fade">
+        <section className="py-6 bg-secondary">
+          <div className="container-wide">
+            <div className="flex flex-wrap items-center justify-center gap-4 text-secondary-foreground">
+              <div className="flex gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 fill-primary text-primary" />
+                ))}
+              </div>
+              <span className="text-sm font-medium">
+                Trusted by creators, coaches, and growing businesses worldwide
+              </span>
             </div>
-            <span className="text-sm font-medium">
-              Trusted by creators, coaches, and growing businesses worldwide
-            </span>
           </div>
-        </div>
-      </section>
+        </section>
+      </AnimatedSection>
 
       {/* Marquee Strip */}
       <section className="py-4 bg-primary overflow-hidden">
@@ -115,7 +120,7 @@ export default function Index() {
       {/* Services Section */}
       <section className="section-padding">
         <div className="container-wide">
-          <div className="text-center mb-12">
+          <AnimatedSection className="text-center mb-12">
             <span className="text-primary text-sm font-medium mb-2 inline-block">— Our Services</span>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground">
               What We <span className="text-primary italic">Offer</span>
@@ -123,22 +128,24 @@ export default function Index() {
             <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
               Comprehensive AI-powered marketing solutions designed to accelerate your growth
             </p>
-          </div>
+          </AnimatedSection>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <StaggeredChildren
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            animation="fade-up"
+            staggerDelay={100}
+          >
             {services.map((service, index) => (
-              <div key={index} className="animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-                <ServiceCard {...service} />
-              </div>
+              <ServiceCard key={index} {...service} />
             ))}
-          </div>
+          </StaggeredChildren>
         </div>
       </section>
 
       {/* AI-Powered Personal Branding Section */}
       <section className="section-padding bg-off-white">
         <div className="container-wide">
-          <div className="text-center mb-12">
+          <AnimatedSection className="text-center mb-12">
             <span className="text-primary text-sm font-medium mb-2 inline-block">— Featured System</span>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground">
               AI-Powered <span className="text-primary italic">Personal Branding</span>
@@ -146,14 +153,17 @@ export default function Index() {
             <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
               Build your personal brand on autopilot with our 5-step AI system
             </p>
-          </div>
+          </AnimatedSection>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+          <StaggeredChildren
+            className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6"
+            animation="scale"
+            staggerDelay={100}
+          >
             {brandingSteps.map((step, index) => (
               <div
                 key={index}
-                className="bg-card rounded-2xl p-6 text-center card-hover border border-border animate-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className="bg-card rounded-2xl p-6 text-center card-hover border border-border"
               >
                 <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <step.icon className="w-6 h-6 text-primary" />
@@ -163,26 +173,29 @@ export default function Index() {
                 <p className="text-muted-foreground text-sm">{step.description}</p>
               </div>
             ))}
-          </div>
+          </StaggeredChildren>
         </div>
       </section>
 
       {/* Why Revision Wave */}
       <section className="section-padding">
         <div className="container-wide">
-          <div className="text-center mb-12">
+          <AnimatedSection className="text-center mb-12">
             <span className="text-primary text-sm font-medium mb-2 inline-block">— Why Choose Us</span>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground">
               Why <span className="text-primary italic">Revision Wave</span>?
             </h2>
-          </div>
+          </AnimatedSection>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <StaggeredChildren
+            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
+            animation="fade-up"
+            staggerDelay={100}
+          >
             {whyUsCards.map((card, index) => (
               <div
                 key={index}
-                className="bg-card rounded-2xl p-6 text-center card-hover border border-border animate-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className="bg-card rounded-2xl p-6 text-center card-hover border border-border"
               >
                 <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center mx-auto mb-4">
                   <card.icon className="w-6 h-6 text-primary-foreground" />
@@ -191,15 +204,19 @@ export default function Index() {
                 <p className="text-muted-foreground text-sm">{card.description}</p>
               </div>
             ))}
-          </div>
+          </StaggeredChildren>
         </div>
       </section>
 
       {/* CTA Section */}
-      <CTASection />
+      <AnimatedSection animation="scale">
+        <CTASection />
+      </AnimatedSection>
 
       {/* FAQ Section */}
-      <FAQSection />
+      <AnimatedSection animation="fade-up">
+        <FAQSection />
+      </AnimatedSection>
 
       {/* Footer */}
       <Footer />
