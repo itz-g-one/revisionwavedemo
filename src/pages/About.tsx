@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/sections/CTASection";
+import { AnimatedSection, StaggeredChildren } from "@/components/ui/animated-section";
 import { Target, Users, Lightbulb, Award } from "lucide-react";
 
 const values = [
@@ -41,7 +42,7 @@ export default function About() {
       {/* Hero */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 section-padding">
         <div className="container-wide">
-          <div className="max-w-3xl mx-auto text-center animate-fade-in-up">
+          <AnimatedSection className="max-w-3xl mx-auto text-center">
             <span className="text-primary text-sm font-medium mb-2 inline-block">— Who We Are</span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6">
               Visions into <span className="text-primary italic">Waves of Impact</span>
@@ -51,21 +52,25 @@ export default function About() {
               We help creators, coaches, and businesses grow with automation-first strategies 
               that eliminate the manual grind.
             </p>
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* Stats */}
       <section className="py-12 bg-secondary">
         <div className="container-wide">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          <StaggeredChildren
+            className="grid grid-cols-2 lg:grid-cols-4 gap-8"
+            animation="scale"
+            staggerDelay={100}
+          >
             {stats.map((stat, index) => (
-              <div key={index} className="text-center animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+              <div key={index} className="text-center">
                 <div className="text-4xl md:text-5xl font-bold text-primary mb-2">{stat.number}</div>
                 <div className="text-secondary-foreground/80 text-sm">{stat.label}</div>
               </div>
             ))}
-          </div>
+          </StaggeredChildren>
         </div>
       </section>
 
@@ -73,7 +78,7 @@ export default function About() {
       <section className="section-padding">
         <div className="container-wide">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="animate-fade-in-up">
+            <AnimatedSection animation="fade-left">
               <span className="text-primary text-sm font-medium mb-2 inline-block">— Our Story</span>
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
                 Born from the Future of <span className="text-primary italic">Marketing</span>
@@ -94,12 +99,14 @@ export default function About() {
                   personalized customer experiences, we're redefining what's possible in digital marketing.
                 </p>
               </div>
-            </div>
-            <div className="bg-off-white rounded-3xl p-8 animate-slide-in-right">
-              <div className="aspect-video bg-secondary rounded-2xl flex items-center justify-center">
-                <span className="text-secondary-foreground/60 text-sm">Company Video Coming Soon</span>
+            </AnimatedSection>
+            <AnimatedSection animation="fade-right" delay={200}>
+              <div className="bg-off-white rounded-3xl p-8">
+                <div className="aspect-video bg-secondary rounded-2xl flex items-center justify-center">
+                  <span className="text-secondary-foreground/60 text-sm">Company Video Coming Soon</span>
+                </div>
               </div>
-            </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
@@ -107,19 +114,22 @@ export default function About() {
       {/* Values */}
       <section className="section-padding bg-off-white">
         <div className="container-wide">
-          <div className="text-center mb-12">
+          <AnimatedSection className="text-center mb-12">
             <span className="text-primary text-sm font-medium mb-2 inline-block">— Our Values</span>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground">
               What Drives <span className="text-primary italic">Us</span>
             </h2>
-          </div>
+          </AnimatedSection>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <StaggeredChildren
+            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
+            animation="fade-up"
+            staggerDelay={100}
+          >
             {values.map((value, index) => (
               <div
                 key={index}
-                className="bg-card rounded-2xl p-6 text-center card-hover border border-border animate-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className="bg-card rounded-2xl p-6 text-center card-hover border border-border"
               >
                 <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center mx-auto mb-4">
                   <value.icon className="w-6 h-6 text-primary-foreground" />
@@ -128,12 +138,14 @@ export default function About() {
                 <p className="text-muted-foreground text-sm">{value.description}</p>
               </div>
             ))}
-          </div>
+          </StaggeredChildren>
         </div>
       </section>
 
       {/* CTA */}
-      <CTASection />
+      <AnimatedSection animation="scale">
+        <CTASection />
+      </AnimatedSection>
 
       {/* Footer */}
       <Footer />

@@ -4,6 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { AnimatedSection, StaggeredChildren } from "@/components/ui/animated-section";
 import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -66,7 +67,7 @@ export default function Contact() {
       {/* Hero */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 section-padding">
         <div className="container-wide">
-          <div className="max-w-3xl mx-auto text-center animate-fade-in-up">
+          <AnimatedSection className="max-w-3xl mx-auto text-center">
             <span className="text-primary text-sm font-medium mb-2 inline-block">— Contact Us</span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6">
               Let's Talk for <span className="text-primary italic">Your</span>
@@ -76,7 +77,7 @@ export default function Contact() {
             <p className="text-lg text-muted-foreground">
               Ready to transform your marketing with AI? Get in touch and let's discuss how we can help you grow.
             </p>
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
@@ -85,8 +86,12 @@ export default function Contact() {
         <div className="container-wide">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Left Column - Contact Info */}
-            <div className="animate-fade-in-up">
-              <div className="space-y-8">
+            <AnimatedSection animation="fade-left">
+              <StaggeredChildren
+                className="space-y-8"
+                animation="fade-up"
+                staggerDelay={100}
+              >
                 {contactInfo.map((item, index) => (
                   <div key={index} className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
@@ -98,9 +103,9 @@ export default function Contact() {
                     </div>
                   </div>
                 ))}
-              </div>
+              </StaggeredChildren>
 
-              <div className="mt-12">
+              <AnimatedSection animation="fade-up" delay={400} className="mt-12">
                 <h3 className="font-bold text-foreground mb-4">Follow Us</h3>
                 <div className="flex gap-3">
                   {socialLinks.map((social) => (
@@ -114,101 +119,103 @@ export default function Contact() {
                     </a>
                   ))}
                 </div>
-              </div>
-            </div>
+              </AnimatedSection>
+            </AnimatedSection>
 
             {/* Right Column - Form */}
-            <div className="bg-off-white rounded-3xl p-8 animate-slide-in-right">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid sm:grid-cols-2 gap-4">
+            <AnimatedSection animation="fade-right" delay={200}>
+              <div className="bg-off-white rounded-3xl p-8">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                        Your Name *
+                      </label>
+                      <Input
+                        id="name"
+                        name="name"
+                        placeholder="John Doe"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                        className="bg-card border-border"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                        Email *
+                      </label>
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="john@example.com"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                        className="bg-card border-border"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
+                        Phone
+                      </label>
+                      <Input
+                        id="phone"
+                        name="phone"
+                        placeholder="+1 (555) 000-0000"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        className="bg-card border-border"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
+                        Subject *
+                      </label>
+                      <Input
+                        id="subject"
+                        name="subject"
+                        placeholder="Project inquiry"
+                        value={formData.subject}
+                        onChange={handleChange}
+                        required
+                        className="bg-card border-border"
+                      />
+                    </div>
+                  </div>
+
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                      Your Name *
+                    <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+                      Your Message *
                     </label>
-                    <Input
-                      id="name"
-                      name="name"
-                      placeholder="John Doe"
-                      value={formData.name}
+                    <Textarea
+                      id="message"
+                      name="message"
+                      placeholder="Tell us about your project..."
+                      rows={5}
+                      value={formData.message}
                       onChange={handleChange}
                       required
-                      className="bg-card border-border"
+                      className="bg-card border-border resize-none"
                     />
                   </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                      Email *
-                    </label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      placeholder="john@example.com"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="bg-card border-border"
-                    />
-                  </div>
-                </div>
 
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
-                      Phone
-                    </label>
-                    <Input
-                      id="phone"
-                      name="phone"
-                      placeholder="+1 (555) 000-0000"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className="bg-card border-border"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
-                      Subject *
-                    </label>
-                    <Input
-                      id="subject"
-                      name="subject"
-                      placeholder="Project inquiry"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      required
-                      className="bg-card border-border"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                    Your Message *
-                  </label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    placeholder="Tell us about your project..."
-                    rows={5}
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    className="bg-card border-border resize-none"
-                  />
-                </div>
-
-                <Button
-                  type="submit"
-                  variant="hero"
-                  size="lg"
-                  className="w-full"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? "Sending..." : "Send Message"}
-                </Button>
-              </form>
-            </div>
+                  <Button
+                    type="submit"
+                    variant="hero"
+                    size="lg"
+                    className="w-full"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Sending..." : "Send Message"}
+                  </Button>
+                </form>
+              </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
