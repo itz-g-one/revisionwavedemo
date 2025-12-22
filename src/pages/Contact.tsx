@@ -5,8 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { AnimatedSection, StaggeredChildren } from "@/components/ui/animated-section";
+import { FloatingParticles, GlowOrbs } from "@/components/ui/floating-particles";
+import { GradientText } from "@/components/ui/gradient-text";
 import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import contactIllustration from "@/assets/contact-illustration.png";
 
 const contactInfo = [
   { icon: Phone, label: "Phone", value: "+1 (555) 123-4567" },
@@ -61,23 +64,35 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-hidden">
       <Navbar />
 
       {/* Hero */}
-      <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 section-padding">
-        <div className="container-wide">
-          <AnimatedSection className="max-w-3xl mx-auto text-center">
-            <span className="text-primary text-sm font-medium mb-2 inline-block">— Contact Us</span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6">
-              Let's Talk for <span className="text-primary italic">Your</span>
-              <br />
-              <span className="text-primary italic">Next Project</span>
-            </h1>
-            <p className="text-lg text-muted-foreground">
-              Ready to transform your marketing with AI? Get in touch and let's discuss how we can help you grow.
-            </p>
-          </AnimatedSection>
+      <section className="relative pt-32 pb-16 lg:pt-40 lg:pb-24 section-padding">
+        <GlowOrbs />
+        <FloatingParticles count={12} />
+        <div className="container-wide relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <AnimatedSection animation="fade-left">
+              <span className="text-primary text-sm font-medium mb-2 inline-block">— Contact Us</span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6">
+                Let's Talk for <GradientText animate className="italic">Your Next Project</GradientText>
+              </h1>
+              <p className="text-lg text-muted-foreground">
+                Ready to transform your marketing with AI? Get in touch and let's discuss how we can help you grow.
+              </p>
+            </AnimatedSection>
+            <AnimatedSection animation="fade-right" delay={200}>
+              <div className="relative hidden lg:block">
+                <div className="absolute -top-8 -right-8 w-64 h-64 bg-primary/20 rounded-full blur-3xl animate-pulse-glow" />
+                <img 
+                  src={contactIllustration} 
+                  alt="Let's Connect" 
+                  className="w-full max-w-sm mx-auto drop-shadow-2xl relative z-10"
+                />
+              </div>
+            </AnimatedSection>
+          </div>
         </div>
       </section>
 
