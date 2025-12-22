@@ -2,7 +2,11 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/sections/CTASection";
 import { AnimatedSection, StaggeredChildren } from "@/components/ui/animated-section";
+import { FloatingParticles, GlowOrbs } from "@/components/ui/floating-particles";
+import { GradientText } from "@/components/ui/gradient-text";
 import { Target, Users, Lightbulb, Award } from "lucide-react";
+import aboutIllustration from "@/assets/about-illustration.png";
+import teamIllustration from "@/assets/team-illustration.png";
 
 const values = [
   {
@@ -36,37 +40,52 @@ const stats = [
 
 export default function About() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-hidden">
       <Navbar />
 
       {/* Hero */}
-      <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 section-padding">
-        <div className="container-wide">
-          <AnimatedSection className="max-w-3xl mx-auto text-center">
-            <span className="text-primary text-sm font-medium mb-2 inline-block">— Who We Are</span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6">
-              Visions into <span className="text-primary italic">Waves of Impact</span>
-            </h1>
-            <p className="text-lg text-muted-foreground">
-              Revision Wave is an AI-enabled digital marketing and personal branding agency. 
-              We help creators, coaches, and businesses grow with automation-first strategies 
-              that eliminate the manual grind.
-            </p>
-          </AnimatedSection>
+      <section className="relative pt-32 pb-16 lg:pt-40 lg:pb-24 section-padding">
+        <GlowOrbs />
+        <FloatingParticles count={12} />
+        <div className="container-wide relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <AnimatedSection animation="fade-left">
+              <span className="text-primary text-sm font-medium mb-2 inline-block">— Who We Are</span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6">
+                Visions into <GradientText animate className="italic">Waves of Impact</GradientText>
+              </h1>
+              <p className="text-lg text-muted-foreground">
+                Revision Wave is an AI-enabled digital marketing and personal branding agency. 
+                We help creators, coaches, and businesses grow with automation-first strategies 
+                that eliminate the manual grind.
+              </p>
+            </AnimatedSection>
+            <AnimatedSection animation="fade-right" delay={200}>
+              <div className="relative">
+                <div className="absolute -top-8 -right-8 w-64 h-64 bg-primary/20 rounded-full blur-3xl animate-pulse-glow" />
+                <img 
+                  src={teamIllustration} 
+                  alt="Our Creative Team" 
+                  className="w-full max-w-md mx-auto lg:max-w-lg drop-shadow-2xl relative z-10"
+                />
+              </div>
+            </AnimatedSection>
+          </div>
         </div>
       </section>
 
       {/* Stats */}
-      <section className="py-12 bg-secondary">
-        <div className="container-wide">
+      <section className="py-12 bg-secondary relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/90 to-secondary" />
+        <div className="container-wide relative z-10">
           <StaggeredChildren
             className="grid grid-cols-2 lg:grid-cols-4 gap-8"
             animation="scale"
             staggerDelay={100}
           >
             {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-primary mb-2">{stat.number}</div>
+              <div key={index} className="text-center group">
+                <div className="text-4xl md:text-5xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform">{stat.number}</div>
                 <div className="text-secondary-foreground/80 text-sm">{stat.label}</div>
               </div>
             ))}
@@ -75,13 +94,14 @@ export default function About() {
       </section>
 
       {/* Our Story */}
-      <section className="section-padding">
-        <div className="container-wide">
+      <section className="section-padding relative">
+        <FloatingParticles count={8} className="opacity-50" />
+        <div className="container-wide relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <AnimatedSection animation="fade-left">
               <span className="text-primary text-sm font-medium mb-2 inline-block">— Our Story</span>
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                Born from the Future of <span className="text-primary italic">Marketing</span>
+                Born from the Future of <GradientText animate className="italic">Marketing</GradientText>
               </h2>
               <div className="space-y-4 text-muted-foreground">
                 <p>
@@ -101,9 +121,14 @@ export default function About() {
               </div>
             </AnimatedSection>
             <AnimatedSection animation="fade-right" delay={200}>
-              <div className="bg-off-white rounded-3xl p-8">
-                <div className="aspect-video bg-secondary rounded-2xl flex items-center justify-center">
-                  <span className="text-secondary-foreground/60 text-sm">Company Video Coming Soon</span>
+              <div className="relative">
+                <div className="absolute -bottom-4 -left-4 w-48 h-48 bg-primary/15 rounded-full blur-2xl" />
+                <div className="bg-off-white rounded-3xl p-6 relative z-10">
+                  <img 
+                    src={aboutIllustration} 
+                    alt="Marketing Analytics Professional" 
+                    className="w-full rounded-2xl drop-shadow-lg"
+                  />
                 </div>
               </div>
             </AnimatedSection>
