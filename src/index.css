@@ -333,4 +333,20 @@
     border-radius: inherit;
     pointer-events: none;
   }
+
+  /* Bubble menu animation */
+  .animate-bubble-in {
+    animation: bubble-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+  }
+
+  @keyframes bubble-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.3) rotate(0deg);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) rotate(var(--rotation, 0deg));
+    }
+  }
 }

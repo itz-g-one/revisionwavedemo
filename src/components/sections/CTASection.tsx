@@ -1,16 +1,17 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { BubbleTag } from "@/components/ui/bubble-tag";
 
 const tags = [
-  { text: "Website Design", variant: "primary" },
-  { text: "AI Automation", variant: "secondary" },
-  { text: "Branding", variant: "primary" },
-  { text: "Content Strategy", variant: "secondary" },
-  { text: "Video Production", variant: "primary" },
-  { text: "Personal Branding", variant: "secondary" },
-  { text: "Performance Ads", variant: "primary" },
-  { text: "Social Media", variant: "secondary" },
+  { text: "Website Design", rotation: -8, hoverBgColor: "#3b82f6" },
+  { text: "AI Automation", rotation: 6, hoverBgColor: "#10b981" },
+  { text: "Branding", rotation: -4, hoverBgColor: "#f59e0b" },
+  { text: "Content Strategy", rotation: 8, hoverBgColor: "#ef4444" },
+  { text: "Video Production", rotation: -6, hoverBgColor: "#8b5cf6" },
+  { text: "Personal Branding", rotation: 5, hoverBgColor: "#ec4899" },
+  { text: "Performance Ads", rotation: -7, hoverBgColor: "#06b6d4" },
+  { text: "Social Media", rotation: 4, hoverBgColor: "#f97316" },
 ];
 
 export function CTASection() {
@@ -30,20 +31,17 @@ export function CTASection() {
           </Link>
         </Button>
 
-        {/* Floating Tags */}
-        <div className="flex flex-wrap justify-center gap-3 mt-12 max-w-3xl mx-auto">
+        {/* Bubble Tags */}
+        <div className="flex flex-wrap justify-center gap-4 mt-12 max-w-4xl mx-auto">
           {tags.map((tag, index) => (
-            <span
+            <BubbleTag
               key={index}
-              className={`floating-tag ${
-                tag.variant === "primary"
-                  ? "floating-tag-primary"
-                  : "floating-tag-secondary"
-              } animate-float`}
-              style={{ animationDelay: `${index * 0.2}s` }}
-            >
-              {tag.text}
-            </span>
+              label={tag.text}
+              rotation={tag.rotation}
+              hoverBgColor={tag.hoverBgColor}
+              hoverTextColor="#ffffff"
+              delay={index * 0.1}
+            />
           ))}
         </div>
       </div>
