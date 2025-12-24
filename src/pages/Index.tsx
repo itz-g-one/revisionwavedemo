@@ -11,6 +11,7 @@ import { FloatingParticles, GlowOrbs } from "@/components/ui/floating-particles"
 import { FloatingIcons, DecorativeShape } from "@/components/ui/floating-icons";
 import { GradientText } from "@/components/ui/gradient-text";
 import { AnimatedCounter } from "@/components/ui/animated-counter";
+import { VerticalSidebarNav } from "@/components/navigation/VerticalSidebarNav";
 import heroIllustration from "@/assets/hero-illustration.png";
 
 const brandingSteps = [
@@ -39,9 +40,10 @@ export default function Index() {
   return (
     <div className="min-h-screen bg-background overflow-hidden">
       <Navbar />
+      <VerticalSidebarNav />
       
       {/* Hero Section - Enhanced */}
-      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 section-padding overflow-hidden">
+      <section id="hero" className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 section-padding overflow-hidden">
         {/* Enhanced gradient background */}
         <div className="absolute inset-0 bg-gradient-to-br from-background via-off-white to-primary/5" />
         
@@ -202,7 +204,7 @@ export default function Index() {
       </section>
 
       {/* Enhanced Services Section */}
-      <section className="section-padding relative">
+      <section id="services" className="section-padding relative">
         <FloatingParticles count={10} className="opacity-50" />
         <DecorativeShape variant="circle" size="lg" className="-top-20 -right-20 opacity-20" />
         <DecorativeShape variant="blob" size="md" className="bottom-0 -left-20 opacity-15" />
@@ -233,7 +235,7 @@ export default function Index() {
       </section>
 
       {/* AI-Powered Personal Branding Section - Enhanced */}
-      <section className="section-padding bg-off-white relative overflow-hidden">
+      <section id="personal-branding" className="section-padding bg-off-white relative overflow-hidden">
         {/* Decorative background */}
         <div className="absolute inset-0 opacity-[0.02]" style={{
           backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--foreground)) 1px, transparent 0)`,
@@ -297,7 +299,7 @@ export default function Index() {
       </section>
 
       {/* Why Revision Wave - Enhanced */}
-      <section className="section-padding relative">
+      <section id="why-us" className="section-padding relative">
         <GlowOrbs />
         <DecorativeShape variant="blob" size="lg" className="-bottom-20 -right-20 opacity-20" />
         
@@ -348,15 +350,19 @@ export default function Index() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <AnimatedSection animation="scale">
-        <CTASection />
-      </AnimatedSection>
+      {/* CTA/Contact Section */}
+      <section id="contact">
+        <AnimatedSection animation="scale">
+          <CTASection />
+        </AnimatedSection>
+      </section>
 
       {/* FAQ Section */}
-      <AnimatedSection animation="fade-up">
-        <FAQSection />
-      </AnimatedSection>
+      <section id="faq">
+        <AnimatedSection animation="fade-up">
+          <FAQSection />
+        </AnimatedSection>
+      </section>
 
       {/* Footer */}
       <Footer />
