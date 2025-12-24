@@ -74,15 +74,22 @@ export function BrandingIcon({ className, isActive }: IconProps) {
       fill="none" 
       className={cn("w-4 h-4", className)}
     >
+      {/* Person/Profile icon for personal branding */}
+      <circle 
+        cx="12" cy="8" 
+        r="4" 
+        fill={isActive ? "currentColor" : "none"}
+        stroke="currentColor" 
+        strokeWidth="2"
+      />
       <path 
-        d="M12 2L14.5 9H22L16 13.5L18.5 21L12 16.5L5.5 21L8 13.5L2 9H9.5L12 2Z" 
+        d="M4 20C4 16.6863 7.58172 14 12 14C16.4183 14 20 16.6863 20 20" 
         fill={isActive ? "currentColor" : "none"}
         stroke="currentColor" 
         strokeWidth="2" 
-        strokeLinecap="round" 
-        strokeLinejoin="round"
+        strokeLinecap="round"
       />
-      <circle cx="12" cy="12" r="2" fill={isActive ? "hsl(var(--secondary))" : "currentColor"} />
+      <circle cx="17" cy="6" r="2" fill={isActive ? "hsl(var(--secondary))" : "currentColor"} />
     </svg>
   );
 }
@@ -94,21 +101,43 @@ export function WhyUsIcon({ className, isActive }: IconProps) {
       fill="none" 
       className={cn("w-4 h-4", className)}
     >
+      {/* Trophy/Award icon */}
       <path 
-        d="M12 2L15 8L22 9L17 14L18.5 21L12 17.5L5.5 21L7 14L2 9L9 8L12 2Z" 
+        d="M6 4H18V8C18 11.3137 15.3137 14 12 14C8.68629 14 6 11.3137 6 8V4Z" 
         fill={isActive ? "currentColor" : "none"}
         stroke="currentColor" 
-        strokeWidth="2" 
-        strokeLinecap="round" 
-        strokeLinejoin="round"
+        strokeWidth="2"
       />
       <path 
-        d="M8 12L11 15L16 10" 
-        stroke={isActive ? "hsl(var(--secondary))" : "currentColor"} 
+        d="M6 6H4C3.44772 6 3 6.44772 3 7V8C3 9.65685 4.34315 11 6 11" 
+        stroke="currentColor" 
         strokeWidth="2" 
-        strokeLinecap="round" 
-        strokeLinejoin="round"
+        strokeLinecap="round"
       />
+      <path 
+        d="M18 6H20C20.5523 6 21 6.44772 21 7V8C21 9.65685 19.6569 11 18 11" 
+        stroke="currentColor" 
+        strokeWidth="2" 
+        strokeLinecap="round"
+      />
+      <path 
+        d="M12 14V17" 
+        stroke="currentColor" 
+        strokeWidth="2"
+      />
+      <path 
+        d="M8 21H16" 
+        stroke="currentColor" 
+        strokeWidth="2" 
+        strokeLinecap="round"
+      />
+      <path 
+        d="M10 17H14V21H10V17Z" 
+        fill={isActive ? "currentColor" : "none"}
+        stroke="currentColor" 
+        strokeWidth="2"
+      />
+      <circle cx="12" cy="8" r="1.5" fill={isActive ? "hsl(var(--secondary))" : "currentColor"} />
     </svg>
   );
 }
