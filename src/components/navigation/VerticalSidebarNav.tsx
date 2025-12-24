@@ -1,12 +1,13 @@
-import { useState, useEffect, useCallback } from "react";
+import { useCallback } from "react";
 import { cn } from "@/lib/utils";
-import { 
-  HomeIcon, 
-  ServicesIcon, 
-  BrandingIcon, 
-  WhyUsIcon, 
-  ContactIcon, 
-  FAQIcon 
+import { useScrollSpy } from "@/hooks/use-scroll-spy";
+import {
+  BrandingIcon,
+  ContactIcon,
+  FAQIcon,
+  HomeIcon,
+  ServicesIcon,
+  WhyUsIcon,
 } from "./icons/SidebarIcons";
 
 interface NavSection {
@@ -33,64 +34,42 @@ const mobileSections: NavSection[] = [
 ];
 
 export function VerticalSidebarNav() {
-  const [activeSection, setActiveSection] = useState<string>("hero");
-  const [isVisible, setIsVisible] = useState(true);
+  const { activeId: activeSection, setActiveId: setActiveSection } = useScrollSpy(
+    sections.map((s) => s.id),
+    { offset: 120 }
+  );
 
-  // Intersection Observer for scroll tracking - simpler approach
-  useEffect(() => {
-    const sectionElements = sections
-      .map(s => document.getElementById(s.id))
-      .filter(Boolean) as HTMLElement[];
+  const handleClick = useCallback(
+    (id: string) => {
+      setActiveSection(id);
+      const element = document.getElementById(id);
+      if (element) {
+        const offset = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
 
-    if (sectionElements.length === 0) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
         });
-      },
-      {
-        threshold: 0.15,
-        rootMargin: "-20% 0px -40% 0px",
       }
-    );
-
-    sectionElements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
-
-  const handleClick = useCallback((id: string) => {
-    setActiveSection(id);
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-    }
-  }, []);
+    },
+    [setActiveSection]
+  );
 
   return (
     <>
       {/* Desktop Vertical Sidebar */}
       <nav
         className={cn(
-          "fixed right-4 lg:right-6 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-center transition-all duration-300",
-          isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-4 pointer-events-none"
+          "fixed right-4 lg:right-6 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-center",
+          "opacity-100 translate-x-0"
         )}
         aria-label="Section navigation"
       >
         <div className="bg-card/80 backdrop-blur-md rounded-2xl p-1.5 border border-border/50 shadow-lg">
           <div className="flex flex-col gap-1">
-            {sections.map((section, index) => {
+            {sections.map((section) => {
               const isActive = activeSection === section.id;
               const { Icon } = section;
 
@@ -135,9 +114,8 @@ export function VerticalSidebarNav() {
       {/* Mobile Bottom Navigation */}
       <nav
         className={cn(
-          "fixed bottom-0 left-0 right-0 z-40 md:hidden transition-all duration-300",
-          "bg-card/95 backdrop-blur-md border-t border-border/40",
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          "fixed bottom-0 left-0 right-0 z-40 md:hidden",
+          "bg-card/95 backdrop-blur-md border-t border-border/40"
         )}
         style={{ boxShadow: "0 -4px 20px rgba(0,0,0,0.08)" }}
         aria-label="Mobile section navigation"
@@ -155,8 +133,8 @@ export function VerticalSidebarNav() {
                 className={cn(
                   "flex flex-col items-center justify-center gap-1 py-1.5 px-3 rounded-xl transition-all duration-200",
                   "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary",
-                  isActive 
-                    ? "bg-primary/10 text-primary" 
+                  isActive
+                    ? "bg-primary/10 text-primary"
                     : "text-muted-foreground hover:text-foreground"
                 )}
               >
@@ -173,7 +151,6 @@ export function VerticalSidebarNav() {
             );
           })}
         </div>
-        {/* iOS safe area */}
         <div className="h-[env(safe-area-inset-bottom)] bg-card" />
       </nav>
     </>
