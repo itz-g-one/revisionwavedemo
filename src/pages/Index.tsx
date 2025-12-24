@@ -319,7 +319,7 @@ export default function Index() {
           </AnimatedSection>
 
           <StaggeredChildren className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8" animation="fade-up" staggerDelay={100}>
-            {whyUsCards.map((card, index) => <div key={index} className="group bg-card rounded-2xl p-8 text-center card-hover border border-border relative overflow-hidden">
+            {whyUsCards.map((card, index) => <div key={index} className="group bg-card rounded-2xl p-8 text-center card-hover border border-border relative overflow-hidden h-full min-h-[240px] flex flex-col">
                 {/* Animated border gradient on hover */}
                 <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                   <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/20 via-transparent to-primary/20" />
