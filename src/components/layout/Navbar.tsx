@@ -5,8 +5,8 @@ import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { name: "Home", path: "/" },
-  { name: "Who We Are", path: "/about" },
   { name: "Services", path: "/services" },
+  { name: "About", path: "/about" },
   { name: "Portfolio", path: "/portfolio" },
   { name: "Contact", path: "/contact" },
 ];
@@ -16,17 +16,19 @@ export function Navbar() {
   const location = useLocation();
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background backdrop-blur-md">
       <div className="container-wide section-padding py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex flex-col leading-none">
-            <span className="text-[10px] font-bold tracking-wider text-foreground">REVISION</span>
-            <span className="text-lg font-extrabold tracking-tight text-foreground">WAVE</span>
+          <Link to="/" className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+              <span className="text-primary-foreground font-bold text-sm">R</span>
+            </div>
+            <span className="text-xl font-bold text-foreground">Revision.</span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
+          {/* Desktop Navigation - Centered */}
+          <nav className="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
@@ -34,7 +36,7 @@ export function Navbar() {
                 className={`text-sm font-medium transition-colors hover:text-primary ${
                   location.pathname === link.path
                     ? "text-primary"
-                    : "text-muted-foreground"
+                    : "text-foreground"
                 }`}
               >
                 {link.name}
@@ -44,8 +46,8 @@ export function Navbar() {
 
           {/* CTA Button */}
           <div className="hidden lg:block">
-            <Button variant="hero" asChild>
-              <Link to="/contact">Get a Quote</Link>
+            <Button variant="outline" className="rounded-full px-6 border-foreground text-foreground hover:bg-foreground hover:text-background" asChild>
+              <Link to="/contact">Contact Us</Link>
             </Button>
           </div>
 
@@ -74,16 +76,16 @@ export function Navbar() {
                   className={`text-base font-medium transition-colors hover:text-primary py-2 ${
                     location.pathname === link.path
                       ? "text-primary"
-                      : "text-muted-foreground"
+                      : "text-foreground"
                   }`}
                   onClick={() => setIsOpen(false)}
                 >
                   {link.name}
                 </Link>
               ))}
-              <Button variant="hero" className="mt-4" asChild>
+              <Button variant="outline" className="mt-4 rounded-full border-foreground text-foreground hover:bg-foreground hover:text-background" asChild>
                 <Link to="/contact" onClick={() => setIsOpen(false)}>
-                  Get a Quote
+                  Contact Us
                 </Link>
               </Button>
             </div>
