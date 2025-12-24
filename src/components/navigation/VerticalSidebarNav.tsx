@@ -1,79 +1,66 @@
 import { useState, useEffect, useCallback } from "react";
-import { Home, Zap, Sparkles, Trophy, MessageSquare, HelpCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { 
+  HomeIcon, 
+  ServicesIcon, 
+  BrandingIcon, 
+  WhyUsIcon, 
+  ContactIcon, 
+  FAQIcon 
+} from "./icons/SidebarIcons";
 
 interface NavSection {
   id: string;
-  icon: React.ElementType;
+  Icon: React.FC<{ className?: string; isActive?: boolean }>;
   label: string;
 }
 
 const sections: NavSection[] = [
-  { id: "hero", icon: Home, label: "Home" },
-  { id: "services", icon: Zap, label: "Services" },
-  { id: "personal-branding", icon: Sparkles, label: "Branding" },
-  { id: "why-us", icon: Trophy, label: "Why Us" },
-  { id: "contact", icon: MessageSquare, label: "Contact" },
-  { id: "faq", icon: HelpCircle, label: "FAQs" },
+  { id: "hero", Icon: HomeIcon, label: "Home" },
+  { id: "services", Icon: ServicesIcon, label: "Services" },
+  { id: "personal-branding", Icon: BrandingIcon, label: "Branding" },
+  { id: "why-us", Icon: WhyUsIcon, label: "Why Us" },
+  { id: "contact", Icon: ContactIcon, label: "Contact" },
+  { id: "faq", Icon: FAQIcon, label: "FAQs" },
 ];
 
-// Simplified sections for mobile (5 items)
 const mobileSections: NavSection[] = [
-  { id: "hero", icon: Home, label: "Home" },
-  { id: "services", icon: Zap, label: "Services" },
-  { id: "why-us", icon: Trophy, label: "Why Us" },
-  { id: "contact", icon: MessageSquare, label: "Contact" },
-  { id: "faq", icon: HelpCircle, label: "FAQs" },
+  { id: "hero", Icon: HomeIcon, label: "Home" },
+  { id: "services", Icon: ServicesIcon, label: "Services" },
+  { id: "why-us", Icon: WhyUsIcon, label: "Why Us" },
+  { id: "contact", Icon: ContactIcon, label: "Contact" },
+  { id: "faq", Icon: FAQIcon, label: "FAQs" },
 ];
 
 export function VerticalSidebarNav() {
   const [activeSection, setActiveSection] = useState<string>("hero");
-  const [isVisible, setIsVisible] = useState(false);
-  const [hasScrolled, setHasScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
-  // Fade in on mount
+  // Intersection Observer for scroll tracking - simpler approach
   useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 300);
-    return () => clearTimeout(timer);
-  }, []);
+    const sectionElements = sections
+      .map(s => document.getElementById(s.id))
+      .filter(Boolean) as HTMLElement[];
 
-  // Track scroll for hiding on top
-  useEffect(() => {
-    const handleScroll = () => {
-      setHasScrolled(window.scrollY > 100);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    if (sectionElements.length === 0) return;
 
-  // Intersection Observer for scroll tracking
-  useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-
-    sections.forEach((section) => {
-      const element = document.getElementById(section.id);
-      if (!element) return;
-
-      const observer = new IntersectionObserver(
-        ([entry]) => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setActiveSection(section.id);
+            setActiveSection(entry.target.id);
           }
-        },
-        {
-          threshold: 0.2,
-          rootMargin: "-10% 0px -30% 0px",
-        }
-      );
+        });
+      },
+      {
+        threshold: 0.15,
+        rootMargin: "-20% 0px -40% 0px",
+      }
+    );
 
-      observer.observe(element);
-      observers.push(observer);
-    });
+    sectionElements.forEach((el) => observer.observe(el));
 
-    return () => {
-      observers.forEach((observer) => observer.disconnect());
-    };
+    return () => observer.disconnect();
   }, []);
 
   const handleClick = useCallback((id: string) => {
@@ -93,34 +80,34 @@ export function VerticalSidebarNav() {
 
   return (
     <>
-      {/* Desktop Vertical Sidebar - Minimal & Clean */}
+      {/* Desktop Vertical Sidebar */}
       <nav
         className={cn(
-          "fixed right-3 lg:right-5 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-center transition-all duration-500",
-          isVisible && hasScrolled ? "opacity-100 translate-x-0" : "opacity-0 translate-x-2 pointer-events-none"
+          "fixed right-4 lg:right-6 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-center transition-all duration-300",
+          isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-4 pointer-events-none"
         )}
         aria-label="Section navigation"
       >
-        <div className="bg-card/90 backdrop-blur-sm rounded-2xl p-1 border border-border/40 shadow-sm">
-          <div className="flex flex-col gap-0.5 relative">
+        <div className="bg-card/80 backdrop-blur-md rounded-2xl p-1.5 border border-border/50 shadow-lg">
+          <div className="flex flex-col gap-1">
             {sections.map((section, index) => {
               const isActive = activeSection === section.id;
-              const Icon = section.icon;
+              const { Icon } = section;
 
               return (
                 <div key={section.id} className="relative group">
                   {/* Tooltip */}
                   <div
                     className={cn(
-                      "absolute right-full mr-2 top-1/2 -translate-y-1/2 px-2 py-1 rounded-md whitespace-nowrap",
-                      "bg-secondary text-secondary-foreground text-[11px] font-medium shadow-md",
-                      "opacity-0 translate-x-1 pointer-events-none transition-all duration-150",
+                      "absolute right-full mr-3 top-1/2 -translate-y-1/2 px-2.5 py-1.5 rounded-lg whitespace-nowrap",
+                      "bg-popover text-popover-foreground text-xs font-medium shadow-lg border border-border/50",
+                      "opacity-0 -translate-x-2 pointer-events-none transition-all duration-200",
                       "group-hover:opacity-100 group-hover:translate-x-0"
                     )}
                   >
                     {section.label}
                     <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-full">
-                      <div className="border-[5px] border-transparent border-l-secondary" />
+                      <div className="border-[6px] border-transparent border-l-popover" />
                     </div>
                   </div>
 
@@ -129,26 +116,15 @@ export function VerticalSidebarNav() {
                     onClick={() => handleClick(section.id)}
                     aria-label={`Navigate to ${section.label} section`}
                     className={cn(
-                      "w-7 h-7 rounded-xl flex items-center justify-center transition-all duration-200",
-                      "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1",
+                      "w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200",
+                      "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
                       isActive
-                        ? "bg-primary shadow-sm"
-                        : "bg-transparent hover:bg-muted"
+                        ? "bg-primary text-primary-foreground shadow-md scale-105"
+                        : "bg-transparent text-muted-foreground hover:bg-muted hover:text-foreground hover:scale-105"
                     )}
                   >
-                    <Icon
-                      className={cn(
-                        "w-3.5 h-3.5 transition-colors duration-200",
-                        isActive ? "text-secondary" : "text-muted-foreground group-hover:text-foreground"
-                      )}
-                      strokeWidth={isActive ? 2.5 : 2}
-                    />
+                    <Icon isActive={isActive} />
                   </button>
-
-                  {/* Connector dot between items */}
-                  {index < sections.length - 1 && (
-                    <div className="absolute left-1/2 -translate-x-1/2 -bottom-0.5 w-0.5 h-1 bg-border/50 rounded-full" />
-                  )}
                 </div>
               );
             })}
@@ -156,20 +132,20 @@ export function VerticalSidebarNav() {
         </div>
       </nav>
 
-      {/* Mobile Bottom Navigation - Clean & Minimal */}
+      {/* Mobile Bottom Navigation */}
       <nav
         className={cn(
           "fixed bottom-0 left-0 right-0 z-40 md:hidden transition-all duration-300",
-          "bg-card/95 backdrop-blur-sm border-t border-border/30",
+          "bg-card/95 backdrop-blur-md border-t border-border/40",
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
         )}
-        style={{ boxShadow: "0 -2px 10px rgba(0,0,0,0.05)" }}
+        style={{ boxShadow: "0 -4px 20px rgba(0,0,0,0.08)" }}
         aria-label="Mobile section navigation"
       >
-        <div className="flex items-center justify-around h-12 px-2 max-w-md mx-auto">
+        <div className="flex items-center justify-around h-14 px-2 max-w-md mx-auto">
           {mobileSections.map((section) => {
             const isActive = activeSection === section.id;
-            const Icon = section.icon;
+            const { Icon } = section;
 
             return (
               <button
@@ -177,21 +153,17 @@ export function VerticalSidebarNav() {
                 onClick={() => handleClick(section.id)}
                 aria-label={`Navigate to ${section.label} section`}
                 className={cn(
-                  "flex flex-col items-center justify-center gap-0.5 py-1 px-3 rounded-lg transition-all duration-200",
-                  "focus:outline-none focus-visible:ring-1 focus-visible:ring-primary",
-                  isActive ? "bg-primary/10" : ""
+                  "flex flex-col items-center justify-center gap-1 py-1.5 px-3 rounded-xl transition-all duration-200",
+                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+                  isActive 
+                    ? "bg-primary/10 text-primary" 
+                    : "text-muted-foreground hover:text-foreground"
                 )}
               >
-                <Icon
-                  className={cn(
-                    "w-4 h-4 transition-colors duration-200",
-                    isActive ? "text-primary" : "text-muted-foreground"
-                  )}
-                  strokeWidth={isActive ? 2.5 : 2}
-                />
+                <Icon isActive={isActive} className="w-5 h-5" />
                 <span
                   className={cn(
-                    "text-[8px] font-medium transition-colors duration-200",
+                    "text-[10px] font-medium transition-colors duration-200",
                     isActive ? "text-primary" : "text-muted-foreground"
                   )}
                 >
