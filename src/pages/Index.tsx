@@ -13,32 +13,67 @@ import { GradientText } from "@/components/ui/gradient-text";
 import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { VerticalSidebarNav } from "@/components/navigation/VerticalSidebarNav";
 import heroIllustration from "@/assets/hero-illustration.png";
-
-const brandingSteps = [
-  { icon: Search, title: "Trend Research", description: "AI analyzes what's trending in your niche" },
-  { icon: FileText, title: "Script Creation", description: "Generate engaging scripts automatically" },
-  { icon: User, title: "Avatar & AI Voice", description: "Create your digital persona" },
-  { icon: Video, title: "Professional Editing", description: "Polished, platform-ready content" },
-  { icon: Upload, title: "Auto Publishing", description: "Schedule and publish automatically" },
-];
-
-const whyUsCards = [
-  { icon: Zap, title: "Automation-First Systems", description: "Reduce manual work by 80% with smart automation" },
-  { icon: Sparkles, title: "AI-Driven Growth", description: "Leverage cutting-edge AI for faster results" },
-  { icon: Target, title: "Creator-Focused Execution", description: "Strategies tailored for personal brands" },
-  { icon: Users, title: "End-to-End Delivery", description: "From strategy to execution, we handle it all" },
-];
-
-const stats = [
-  { value: 150, suffix: "+", label: "Projects Completed", icon: Trophy },
-  { value: 98, suffix: "%", label: "Client Satisfaction", icon: ThumbsUp },
-  { value: 50, suffix: "+", label: "Happy Clients", icon: Users },
-  { value: 5, suffix: "x", label: "Average ROI", icon: Rocket },
-];
-
+const brandingSteps = [{
+  icon: Search,
+  title: "Trend Research",
+  description: "AI analyzes what's trending in your niche"
+}, {
+  icon: FileText,
+  title: "Script Creation",
+  description: "Generate engaging scripts automatically"
+}, {
+  icon: User,
+  title: "Avatar & AI Voice",
+  description: "Create your digital persona"
+}, {
+  icon: Video,
+  title: "Professional Editing",
+  description: "Polished, platform-ready content"
+}, {
+  icon: Upload,
+  title: "Auto Publishing",
+  description: "Schedule and publish automatically"
+}];
+const whyUsCards = [{
+  icon: Zap,
+  title: "Automation-First Systems",
+  description: "Reduce manual work by 80% with smart automation"
+}, {
+  icon: Sparkles,
+  title: "AI-Driven Growth",
+  description: "Leverage cutting-edge AI for faster results"
+}, {
+  icon: Target,
+  title: "Creator-Focused Execution",
+  description: "Strategies tailored for personal brands"
+}, {
+  icon: Users,
+  title: "End-to-End Delivery",
+  description: "From strategy to execution, we handle it all"
+}];
+const stats = [{
+  value: 150,
+  suffix: "+",
+  label: "Projects Completed",
+  icon: Trophy
+}, {
+  value: 98,
+  suffix: "%",
+  label: "Client Satisfaction",
+  icon: ThumbsUp
+}, {
+  value: 50,
+  suffix: "+",
+  label: "Happy Clients",
+  icon: Users
+}, {
+  value: 5,
+  suffix: "x",
+  label: "Average ROI",
+  icon: Rocket
+}];
 export default function Index() {
-  return (
-    <div className="min-h-screen bg-background overflow-hidden">
+  return <div className="min-h-screen bg-background overflow-hidden">
       <Navbar />
       <VerticalSidebarNav />
       
@@ -57,9 +92,9 @@ export default function Index() {
         
         {/* Animated grid pattern */}
         <div className="absolute inset-0 opacity-[0.02]" style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--foreground)) 1px, transparent 0)`,
-          backgroundSize: '40px 40px'
-        }} />
+        backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--foreground)) 1px, transparent 0)`,
+        backgroundSize: '40px 40px'
+      }} />
 
         <div className="container-wide relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -96,11 +131,7 @@ export default function Index() {
 
               {/* Enhanced Stats Row with icons and hover effects */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8 border-t border-border">
-                {stats.map((stat, index) => (
-                  <div 
-                    key={index} 
-                    className="group text-center sm:text-left p-3 rounded-xl hover:bg-card hover:shadow-md transition-all duration-300 cursor-default"
-                  >
+                {stats.map((stat, index) => <div key={index} className="group text-center sm:text-left p-3 rounded-xl hover:bg-card hover:shadow-md transition-all duration-300 cursor-default">
                     <div className="flex items-center gap-2 mb-1">
                       <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                         <stat.icon className="w-4 h-4 text-primary" />
@@ -110,8 +141,7 @@ export default function Index() {
                       </div>
                     </div>
                     <div className="text-xs sm:text-sm text-muted-foreground ml-10 sm:ml-0">{stat.label}</div>
-                  </div>
-                ))}
+                  </div>)}
               </div>
             </AnimatedSection>
 
@@ -149,11 +179,7 @@ export default function Index() {
                   <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-6 bg-foreground/8 blur-xl rounded-full" />
                   
                   {/* Hero illustration */}
-                  <img
-                    src={heroIllustration}
-                    alt="AI Marketing Professional helping grow your business"
-                    className="w-full max-w-md mx-auto lg:max-w-lg drop-shadow-xl relative z-10"
-                  />
+                  <img alt="AI Marketing Professional helping grow your business" className="w-full max-w-md mx-auto lg:max-w-lg drop-shadow-xl relative z-10" src="/lovable-uploads/ffa87761-19a8-4aba-a2ad-009d8360bcd8.png" />
                 </div>
               </div>
             </AnimatedSection>
@@ -174,9 +200,9 @@ export default function Index() {
           <div className="container-wide relative z-10">
             <div className="flex flex-wrap items-center justify-center gap-4 text-secondary-foreground">
               <div className="flex gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-primary text-primary animate-pulse" style={{ animationDelay: `${i * 100}ms` }} />
-                ))}
+                {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-primary text-primary animate-pulse" style={{
+                animationDelay: `${i * 100}ms`
+              }} />)}
               </div>
               <span className="text-sm font-medium">
                 Trusted by creators, coaches, and growing businesses worldwide
@@ -191,14 +217,12 @@ export default function Index() {
         <div className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-primary animate-gradient" />
         <div className="flex whitespace-nowrap relative z-10">
           <div className="marquee flex gap-10">
-            {["App Design", "Website Design", "Dashboard", "Wireframe", "AI Automation", "Personal Branding", "Video Editing", "Performance Marketing", "App Design", "Website Design", "Dashboard", "Wireframe", "AI Automation", "Personal Branding", "Video Editing", "Performance Marketing"].map((item, i) => (
-              <span key={i} className="flex items-center gap-4 text-primary-foreground font-semibold text-lg">
+            {["App Design", "Website Design", "Dashboard", "Wireframe", "AI Automation", "Personal Branding", "Video Editing", "Performance Marketing", "App Design", "Website Design", "Dashboard", "Wireframe", "AI Automation", "Personal Branding", "Video Editing", "Performance Marketing"].map((item, i) => <span key={i} className="flex items-center gap-4 text-primary-foreground font-semibold text-lg">
                 {item}
                 <span className="text-primary-foreground/80">
                   <Sparkles className="w-4 h-4" />
                 </span>
-              </span>
-            ))}
+              </span>)}
           </div>
         </div>
       </section>
@@ -220,16 +244,10 @@ export default function Index() {
             </p>
           </AnimatedSection>
 
-          <StaggeredChildren
-            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
-            animation="fade-up"
-            staggerDelay={100}
-          >
-            {enhancedServices.map((service, index) => (
-              <div key={index}>
+          <StaggeredChildren className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8" animation="fade-up" staggerDelay={100}>
+            {enhancedServices.map((service, index) => <div key={index}>
                 <EnhancedServiceCard {...service} />
-              </div>
-            ))}
+              </div>)}
           </StaggeredChildren>
         </div>
       </section>
@@ -238,9 +256,9 @@ export default function Index() {
       <section id="personal-branding" className="section-padding bg-off-white relative overflow-hidden">
         {/* Decorative background */}
         <div className="absolute inset-0 opacity-[0.02]" style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--foreground)) 1px, transparent 0)`,
-          backgroundSize: '30px 30px'
-        }} />
+        backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--foreground)) 1px, transparent 0)`,
+        backgroundSize: '30px 30px'
+      }} />
         <DecorativeShape variant="ring" size="lg" className="top-10 -right-20 opacity-20" />
         
         <div className="container-wide relative z-10">
@@ -260,16 +278,8 @@ export default function Index() {
             </p>
           </AnimatedSection>
 
-          <StaggeredChildren
-            className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6"
-            animation="scale"
-            staggerDelay={100}
-          >
-            {brandingSteps.map((step, index) => (
-              <div
-                key={index}
-                className="group bg-card rounded-2xl p-6 text-center card-hover border border-border relative overflow-hidden"
-              >
+          <StaggeredChildren className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6" animation="scale" staggerDelay={100}>
+            {brandingSteps.map((step, index) => <div key={index} className="group bg-card rounded-2xl p-6 text-center card-hover border border-border relative overflow-hidden">
                 {/* Hover gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 
@@ -289,11 +299,8 @@ export default function Index() {
                 </div>
 
                 {/* Connection line - dashed */}
-                {index < brandingSteps.length - 1 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-3 w-6 border-t-2 border-dashed border-primary/40" />
-                )}
-              </div>
-            ))}
+                {index < brandingSteps.length - 1 && <div className="hidden lg:block absolute top-1/2 -right-3 w-6 border-t-2 border-dashed border-primary/40" />}
+              </div>)}
           </StaggeredChildren>
         </div>
       </section>
@@ -311,16 +318,8 @@ export default function Index() {
             </h2>
           </AnimatedSection>
 
-          <StaggeredChildren
-            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8"
-            animation="fade-up"
-            staggerDelay={100}
-          >
-            {whyUsCards.map((card, index) => (
-              <div
-                key={index}
-                className="group bg-card rounded-2xl p-8 text-center card-hover border border-border relative overflow-hidden"
-              >
+          <StaggeredChildren className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8" animation="fade-up" staggerDelay={100}>
+            {whyUsCards.map((card, index) => <div key={index} className="group bg-card rounded-2xl p-8 text-center card-hover border border-border relative overflow-hidden">
                 {/* Animated border gradient on hover */}
                 <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                   <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/20 via-transparent to-primary/20" />
@@ -328,9 +327,9 @@ export default function Index() {
                 
                 {/* Background pattern on hover */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity" style={{
-                  backgroundImage: `radial-gradient(circle at 2px 2px, hsl(var(--primary)) 1px, transparent 0)`,
-                  backgroundSize: '16px 16px'
-                }} />
+              backgroundImage: `radial-gradient(circle at 2px 2px, hsl(var(--primary)) 1px, transparent 0)`,
+              backgroundSize: '16px 16px'
+            }} />
                 
                 <div className="relative z-10">
                   {/* Enhanced icon circle with pulse glow */}
@@ -344,8 +343,7 @@ export default function Index() {
                   <h3 className="font-bold text-lg text-foreground mb-3 group-hover:text-primary transition-colors">{card.title}</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">{card.description}</p>
                 </div>
-              </div>
-            ))}
+              </div>)}
           </StaggeredChildren>
         </div>
       </section>
@@ -366,6 +364,5 @@ export default function Index() {
 
       {/* Footer */}
       <Footer />
-    </div>
-  );
+    </div>;
 }
