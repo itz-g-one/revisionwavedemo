@@ -67,7 +67,7 @@ export function VerticalSidebarNav() {
         )}
         aria-label="Section navigation"
       >
-        <div className="bg-[hsl(150,25%,18%)]/95 backdrop-blur-md rounded-full p-1 shadow-[0_4px_20px_rgba(0,0,0,0.15)]">
+        <div className="bg-secondary/95 backdrop-blur-md rounded-full p-1 shadow-[0_4px_20px_rgba(0,0,0,0.15)]">
           <div className="flex flex-col gap-0.5">
             {sections.map((section) => {
               const isActive = activeSection === section.id;
@@ -79,7 +79,7 @@ export function VerticalSidebarNav() {
                   <div
                     className={cn(
                       "absolute right-full mr-2 top-1/2 -translate-y-1/2 px-2 py-1 rounded-lg whitespace-nowrap",
-                      "bg-[hsl(150,25%,18%)] text-[hsl(45,20%,95%)] text-[10px] font-medium shadow-lg",
+                      "bg-secondary text-secondary-foreground text-[10px] font-medium shadow-lg",
                       "opacity-0 -translate-x-2 pointer-events-none transition-all duration-200",
                       "group-hover:opacity-100 group-hover:translate-x-0"
                     )}
@@ -93,10 +93,10 @@ export function VerticalSidebarNav() {
                     aria-label={`Navigate to ${section.label} section`}
                     className={cn(
                       "w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300",
-                      "focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(45,90%,55%)]",
+                      "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary",
                       isActive
-                        ? "bg-[hsl(45,90%,55%)] text-[hsl(150,25%,18%)] scale-110"
-                        : "bg-transparent text-[hsl(45,20%,80%)] hover:text-[hsl(45,20%,95%)] hover:bg-[hsl(45,20%,95%)]/10"
+                        ? "bg-primary text-primary-foreground scale-110"
+                        : "bg-transparent text-secondary-foreground/70 hover:text-secondary-foreground hover:bg-secondary-foreground/10"
                     )}
                   >
                     <Icon isActive={isActive} className="w-3.5 h-3.5" />
@@ -112,7 +112,7 @@ export function VerticalSidebarNav() {
       <nav
         className={cn(
           "fixed bottom-0 left-0 right-0 z-40 md:hidden",
-          "bg-[hsl(150,25%,18%)]/98 backdrop-blur-md"
+          "bg-secondary/98 backdrop-blur-md"
         )}
         style={{ boxShadow: "0 -2px 16px rgba(0,0,0,0.12)" }}
         aria-label="Mobile section navigation"
@@ -129,17 +129,17 @@ export function VerticalSidebarNav() {
                 aria-label={`Navigate to ${section.label} section`}
                 className={cn(
                   "flex flex-col items-center justify-center gap-0.5 py-1 px-2 rounded-lg transition-all duration-300",
-                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(45,90%,55%)]",
+                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary",
                   isActive
-                    ? "text-[hsl(45,90%,55%)]"
-                    : "text-[hsl(45,20%,70%)] hover:text-[hsl(45,20%,95%)]"
+                    ? "text-primary"
+                    : "text-secondary-foreground/60 hover:text-secondary-foreground"
                 )}
               >
                 <Icon isActive={isActive} className="w-4 h-4" />
                 <span
                   className={cn(
                     "text-[9px] font-medium transition-colors duration-200",
-                    isActive ? "text-[hsl(45,90%,55%)]" : "text-[hsl(45,20%,70%)]"
+                    isActive ? "text-primary" : "text-secondary-foreground/60"
                   )}
                 >
                   {section.label}
@@ -148,7 +148,7 @@ export function VerticalSidebarNav() {
             );
           })}
         </div>
-        <div className="h-[env(safe-area-inset-bottom)] bg-[hsl(150,25%,18%)]" />
+        <div className="h-[env(safe-area-inset-bottom)] bg-secondary" />
       </nav>
     </>
   );
