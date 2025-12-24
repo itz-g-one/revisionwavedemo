@@ -1,5 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
-import { useLocation } from "react-router-dom";
+import { useState, useEffect, useCallback } from "react";
 import { Home, Zap, Sparkles, Trophy, MessageSquare, HelpCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -18,6 +17,7 @@ const sections: NavSection[] = [
   { id: "faq", icon: HelpCircle, label: "FAQs" },
 ];
 
+// Simplified sections for mobile (5 items)
 const mobileSections: NavSection[] = [
   { id: "hero", icon: Home, label: "Home" },
   { id: "services", icon: Zap, label: "Services" },
@@ -27,85 +27,62 @@ const mobileSections: NavSection[] = [
 ];
 
 export function VerticalSidebarNav() {
-  const location = useLocation();
   const [activeSection, setActiveSection] = useState<string>("hero");
   const [isVisible, setIsVisible] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
 
-  // Only show on homepage
-  const isHomePage = location.pathname === "/";
-
   // Fade in on mount
   useEffect(() => {
-    if (!isHomePage) return;
     const timer = setTimeout(() => setIsVisible(true), 300);
     return () => clearTimeout(timer);
-  }, [isHomePage]);
+  }, []);
 
-  // Track scroll with throttling for performance
+  // Track scroll for hiding on top
   useEffect(() => {
-    if (!isHomePage) return;
-    
-    let ticking = false;
     const handleScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          setHasScrolled(window.scrollY > 100);
-          ticking = false;
-        });
-        ticking = true;
-      }
+      setHasScrolled(window.scrollY > 100);
     };
-    
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isHomePage]);
+  }, []);
 
-  // Intersection Observer for scroll tracking - with cleanup
+  // Intersection Observer for scroll tracking
   useEffect(() => {
-    if (!isHomePage) return;
-    
-    // Small delay to ensure DOM elements exist
-    const setupTimeout = setTimeout(() => {
-      const observers: IntersectionObserver[] = [];
+    const observers: IntersectionObserver[] = [];
 
-      sections.forEach((section) => {
-        const element = document.getElementById(section.id);
-        if (!element) return;
+    sections.forEach((section) => {
+      const element = document.getElementById(section.id);
+      if (!element) return;
 
-        const observer = new IntersectionObserver(
-          ([entry]) => {
-            if (entry.isIntersecting) {
-              setActiveSection(section.id);
-            }
-          },
-          {
-            threshold: 0.15,
-            rootMargin: "-15% 0px -35% 0px",
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setActiveSection(section.id);
           }
-        );
+        },
+        {
+          threshold: 0.2,
+          rootMargin: "-10% 0px -30% 0px",
+        }
+      );
 
-        observer.observe(element);
-        observers.push(observer);
-      });
+      observer.observe(element);
+      observers.push(observer);
+    });
 
-      // Store cleanup function
-      return () => {
-        observers.forEach((observer) => observer.disconnect());
-      };
-    }, 100);
-
-    return () => clearTimeout(setupTimeout);
-  }, [isHomePage]);
+    return () => {
+      observers.forEach((observer) => observer.disconnect());
+    };
+  }, []);
 
   const handleClick = useCallback((id: string) => {
+    setActiveSection(id);
     const element = document.getElementById(id);
     if (element) {
-      setActiveSection(id);
       const offset = 80;
       const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.scrollY - offset;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
 
       window.scrollTo({
         top: offsetPosition,
@@ -114,22 +91,18 @@ export function VerticalSidebarNav() {
     }
   }, []);
 
-  // Don't render on non-home pages
-  if (!isHomePage) return null;
-
   return (
     <>
-      {/* Desktop Vertical Sidebar */}
+      {/* Desktop Vertical Sidebar - Minimal & Clean */}
       <nav
         className={cn(
-          "fixed right-3 lg:right-5 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-center",
-          "transition-opacity duration-300",
-          isVisible && hasScrolled ? "opacity-100" : "opacity-0 pointer-events-none"
+          "fixed right-3 lg:right-5 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-center transition-all duration-500",
+          isVisible && hasScrolled ? "opacity-100 translate-x-0" : "opacity-0 translate-x-2 pointer-events-none"
         )}
         aria-label="Section navigation"
       >
         <div className="bg-card/90 backdrop-blur-sm rounded-2xl p-1 border border-border/40 shadow-sm">
-          <div className="flex flex-col gap-0.5">
+          <div className="flex flex-col gap-0.5 relative">
             {sections.map((section, index) => {
               const isActive = activeSection === section.id;
               const Icon = section.icon;
@@ -141,8 +114,8 @@ export function VerticalSidebarNav() {
                     className={cn(
                       "absolute right-full mr-2 top-1/2 -translate-y-1/2 px-2 py-1 rounded-md whitespace-nowrap",
                       "bg-secondary text-secondary-foreground text-[11px] font-medium shadow-md",
-                      "opacity-0 pointer-events-none transition-opacity duration-150",
-                      "group-hover:opacity-100"
+                      "opacity-0 translate-x-1 pointer-events-none transition-all duration-150",
+                      "group-hover:opacity-100 group-hover:translate-x-0"
                     )}
                   >
                     {section.label}
@@ -156,9 +129,8 @@ export function VerticalSidebarNav() {
                     onClick={() => handleClick(section.id)}
                     aria-label={`Navigate to ${section.label} section`}
                     className={cn(
-                      "w-7 h-7 rounded-xl flex items-center justify-center",
-                      "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary",
-                      "transition-colors duration-150",
+                      "w-7 h-7 rounded-xl flex items-center justify-center transition-all duration-200",
+                      "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1",
                       isActive
                         ? "bg-primary shadow-sm"
                         : "bg-transparent hover:bg-muted"
@@ -166,14 +138,14 @@ export function VerticalSidebarNav() {
                   >
                     <Icon
                       className={cn(
-                        "w-3.5 h-3.5",
+                        "w-3.5 h-3.5 transition-colors duration-200",
                         isActive ? "text-secondary" : "text-muted-foreground group-hover:text-foreground"
                       )}
                       strokeWidth={isActive ? 2.5 : 2}
                     />
                   </button>
 
-                  {/* Connector dot */}
+                  {/* Connector dot between items */}
                   {index < sections.length - 1 && (
                     <div className="absolute left-1/2 -translate-x-1/2 -bottom-0.5 w-0.5 h-1 bg-border/50 rounded-full" />
                   )}
@@ -184,13 +156,12 @@ export function VerticalSidebarNav() {
         </div>
       </nav>
 
-      {/* Mobile Bottom Navigation */}
+      {/* Mobile Bottom Navigation - Clean & Minimal */}
       <nav
         className={cn(
-          "fixed bottom-0 left-0 right-0 z-40 md:hidden",
+          "fixed bottom-0 left-0 right-0 z-40 md:hidden transition-all duration-300",
           "bg-card/95 backdrop-blur-sm border-t border-border/30",
-          "transition-opacity duration-300",
-          isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
         )}
         style={{ boxShadow: "0 -2px 10px rgba(0,0,0,0.05)" }}
         aria-label="Mobile section navigation"
@@ -206,22 +177,21 @@ export function VerticalSidebarNav() {
                 onClick={() => handleClick(section.id)}
                 aria-label={`Navigate to ${section.label} section`}
                 className={cn(
-                  "flex flex-col items-center justify-center gap-0.5 py-1 px-3 rounded-lg",
+                  "flex flex-col items-center justify-center gap-0.5 py-1 px-3 rounded-lg transition-all duration-200",
                   "focus:outline-none focus-visible:ring-1 focus-visible:ring-primary",
-                  "transition-colors duration-150",
                   isActive ? "bg-primary/10" : ""
                 )}
               >
                 <Icon
                   className={cn(
-                    "w-4 h-4",
+                    "w-4 h-4 transition-colors duration-200",
                     isActive ? "text-primary" : "text-muted-foreground"
                   )}
                   strokeWidth={isActive ? 2.5 : 2}
                 />
                 <span
                   className={cn(
-                    "text-[8px] font-medium",
+                    "text-[8px] font-medium transition-colors duration-200",
                     isActive ? "text-primary" : "text-muted-foreground"
                   )}
                 >
