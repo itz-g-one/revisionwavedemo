@@ -16,17 +16,15 @@ export function Navbar() {
   const location = useLocation();
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#1a3a2f] shadow-lg">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background backdrop-blur-md">
       <div className="container-wide section-padding py-4">
         <div className="flex items-center justify-between">
-          {/* Logo with double-ring design */}
+          {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-full border-2 border-primary/30 flex items-center justify-center">
-              <div className="w-7 h-7 rounded-full bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-sm">R</span>
-              </div>
+            <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+              <span className="text-primary-foreground font-bold text-sm">R</span>
             </div>
-            <span className="text-xl font-bold text-white">Revision.</span>
+            <span className="text-xl font-bold text-foreground">Revision.</span>
           </Link>
 
           {/* Desktop Navigation - Centered */}
@@ -38,7 +36,7 @@ export function Navbar() {
                 className={`text-sm font-medium transition-colors hover:text-primary ${
                   location.pathname === link.path
                     ? "text-primary"
-                    : "text-white"
+                    : "text-foreground"
                 }`}
               >
                 {link.name}
@@ -48,11 +46,7 @@ export function Navbar() {
 
           {/* CTA Button */}
           <div className="hidden lg:block">
-            <Button 
-              variant="outline" 
-              className="rounded-full px-6 border-white text-white hover:bg-white hover:text-[#1a3a2f] bg-transparent" 
-              asChild
-            >
+            <Button variant="outline" className="rounded-full px-6 border-foreground text-foreground hover:bg-foreground hover:text-background" asChild>
               <Link to="/contact">Contact Us</Link>
             </Button>
           </div>
@@ -64,9 +58,9 @@ export function Navbar() {
             aria-label="Toggle menu"
           >
             {isOpen ? (
-              <X className="h-6 w-6 text-white" />
+              <X className="h-6 w-6 text-foreground" />
             ) : (
-              <Menu className="h-6 w-6 text-white" />
+              <Menu className="h-6 w-6 text-foreground" />
             )}
           </button>
         </div>
@@ -82,18 +76,14 @@ export function Navbar() {
                   className={`text-base font-medium transition-colors hover:text-primary py-2 ${
                     location.pathname === link.path
                       ? "text-primary"
-                      : "text-white"
+                      : "text-foreground"
                   }`}
                   onClick={() => setIsOpen(false)}
                 >
                   {link.name}
                 </Link>
               ))}
-              <Button 
-                variant="outline" 
-                className="mt-4 rounded-full border-white text-white hover:bg-white hover:text-[#1a3a2f] bg-transparent" 
-                asChild
-              >
+              <Button variant="outline" className="mt-4 rounded-full border-foreground text-foreground hover:bg-foreground hover:text-background" asChild>
                 <Link to="/contact" onClick={() => setIsOpen(false)}>
                   Contact Us
                 </Link>
