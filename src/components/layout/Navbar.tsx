@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -20,11 +21,8 @@ export function Navbar() {
       <div className="container-wide section-padding py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg">R</span>
-            </div>
-            <span className="text-xl font-bold text-foreground">Revision Wave</span>
+          <Link to="/" className="flex items-center">
+            <img src={logo} alt="Revision Wave" className="h-10 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}
