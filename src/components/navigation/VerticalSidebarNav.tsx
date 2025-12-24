@@ -59,16 +59,16 @@ export function VerticalSidebarNav() {
 
   return (
     <>
-      {/* Desktop Vertical Sidebar */}
+      {/* Desktop Vertical Sidebar - Compact */}
       <nav
         className={cn(
-          "fixed right-4 lg:right-6 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-center",
+          "fixed right-3 lg:right-4 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-center",
           "opacity-100 translate-x-0"
         )}
         aria-label="Section navigation"
       >
-        <div className="bg-card/80 backdrop-blur-md rounded-2xl p-1.5 border border-border/50 shadow-lg">
-          <div className="flex flex-col gap-1">
+        <div className="bg-[hsl(150,25%,18%)]/95 backdrop-blur-md rounded-full p-1 shadow-[0_4px_20px_rgba(0,0,0,0.15)]">
+          <div className="flex flex-col gap-0.5">
             {sections.map((section) => {
               const isActive = activeSection === section.id;
               const { Icon } = section;
@@ -78,16 +78,13 @@ export function VerticalSidebarNav() {
                   {/* Tooltip */}
                   <div
                     className={cn(
-                      "absolute right-full mr-3 top-1/2 -translate-y-1/2 px-2.5 py-1.5 rounded-lg whitespace-nowrap",
-                      "bg-popover text-popover-foreground text-xs font-medium shadow-lg border border-border/50",
+                      "absolute right-full mr-2 top-1/2 -translate-y-1/2 px-2 py-1 rounded-lg whitespace-nowrap",
+                      "bg-[hsl(150,25%,18%)] text-[hsl(45,20%,95%)] text-[10px] font-medium shadow-lg",
                       "opacity-0 -translate-x-2 pointer-events-none transition-all duration-200",
                       "group-hover:opacity-100 group-hover:translate-x-0"
                     )}
                   >
                     {section.label}
-                    <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-full">
-                      <div className="border-[6px] border-transparent border-l-popover" />
-                    </div>
                   </div>
 
                   {/* Icon Button */}
@@ -95,14 +92,14 @@ export function VerticalSidebarNav() {
                     onClick={() => handleClick(section.id)}
                     aria-label={`Navigate to ${section.label} section`}
                     className={cn(
-                      "w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200",
-                      "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
+                      "w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300",
+                      "focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(45,90%,55%)]",
                       isActive
-                        ? "bg-primary text-primary-foreground shadow-md scale-105"
-                        : "bg-transparent text-muted-foreground hover:bg-muted hover:text-foreground hover:scale-105"
+                        ? "bg-[hsl(45,90%,55%)] text-[hsl(150,25%,18%)] scale-110"
+                        : "bg-transparent text-[hsl(45,20%,80%)] hover:text-[hsl(45,20%,95%)] hover:bg-[hsl(45,20%,95%)]/10"
                     )}
                   >
-                    <Icon isActive={isActive} />
+                    <Icon isActive={isActive} className="w-3.5 h-3.5" />
                   </button>
                 </div>
               );
@@ -111,16 +108,16 @@ export function VerticalSidebarNav() {
         </div>
       </nav>
 
-      {/* Mobile Bottom Navigation */}
+      {/* Mobile Bottom Navigation - Compact */}
       <nav
         className={cn(
           "fixed bottom-0 left-0 right-0 z-40 md:hidden",
-          "bg-card/95 backdrop-blur-md border-t border-border/40"
+          "bg-[hsl(150,25%,18%)]/98 backdrop-blur-md"
         )}
-        style={{ boxShadow: "0 -4px 20px rgba(0,0,0,0.08)" }}
+        style={{ boxShadow: "0 -2px 16px rgba(0,0,0,0.12)" }}
         aria-label="Mobile section navigation"
       >
-        <div className="flex items-center justify-around h-14 px-2 max-w-md mx-auto">
+        <div className="flex items-center justify-around h-12 px-1 max-w-md mx-auto">
           {mobileSections.map((section) => {
             const isActive = activeSection === section.id;
             const { Icon } = section;
@@ -131,18 +128,18 @@ export function VerticalSidebarNav() {
                 onClick={() => handleClick(section.id)}
                 aria-label={`Navigate to ${section.label} section`}
                 className={cn(
-                  "flex flex-col items-center justify-center gap-1 py-1.5 px-3 rounded-xl transition-all duration-200",
-                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+                  "flex flex-col items-center justify-center gap-0.5 py-1 px-2 rounded-lg transition-all duration-300",
+                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(45,90%,55%)]",
                   isActive
-                    ? "bg-primary/10 text-primary"
-                    : "text-muted-foreground hover:text-foreground"
+                    ? "text-[hsl(45,90%,55%)]"
+                    : "text-[hsl(45,20%,70%)] hover:text-[hsl(45,20%,95%)]"
                 )}
               >
-                <Icon isActive={isActive} className="w-5 h-5" />
+                <Icon isActive={isActive} className="w-4 h-4" />
                 <span
                   className={cn(
-                    "text-[10px] font-medium transition-colors duration-200",
-                    isActive ? "text-primary" : "text-muted-foreground"
+                    "text-[9px] font-medium transition-colors duration-200",
+                    isActive ? "text-[hsl(45,90%,55%)]" : "text-[hsl(45,20%,70%)]"
                   )}
                 >
                   {section.label}
@@ -151,7 +148,7 @@ export function VerticalSidebarNav() {
             );
           })}
         </div>
-        <div className="h-[env(safe-area-inset-bottom)] bg-card" />
+        <div className="h-[env(safe-area-inset-bottom)] bg-[hsl(150,25%,18%)]" />
       </nav>
     </>
   );
