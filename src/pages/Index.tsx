@@ -116,32 +116,27 @@ export default function Index() {
             {/* Right Column - Enhanced Illustration */}
             <AnimatedSection animation="fade-right" delay={200}>
               <div className="relative">
-                {/* Animated glow rings */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] rounded-full border-2 border-primary/20 animate-spin-slow" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] h-[130%] rounded-full border border-primary/10 animate-spin-slow" style={{ animationDirection: 'reverse', animationDuration: '30s' }} />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] rounded-full border border-primary/5 animate-spin-slow" style={{ animationDuration: '40s' }} />
-                
                 {/* Glow effect behind character */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-pulse-glow"></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-primary/15 rounded-full blur-3xl"></div>
                 
                 <div className="relative">
                   {/* Floating icons around the character */}
                   <FloatingIcons />
                   
                   {/* Floating tag badges */}
-                  <div className="absolute top-8 right-4 bg-card rounded-xl shadow-lg px-4 py-2 animate-float border border-border gradient-border">
+                  <div className="absolute top-4 right-0 bg-card/90 backdrop-blur-sm rounded-xl shadow-lg px-4 py-2.5 animate-float border border-border/50 z-20">
                     <span className="text-sm font-medium text-foreground flex items-center gap-2">
                       <Sparkles className="w-4 h-4 text-primary" />
                       AI Marketing
                     </span>
                   </div>
-                  <div className="absolute bottom-24 -left-4 bg-secondary text-secondary-foreground rounded-xl shadow-lg px-4 py-2 animate-float-delayed">
+                  <div className="absolute bottom-32 -left-4 bg-secondary text-secondary-foreground rounded-xl shadow-lg px-4 py-2.5 animate-float-delayed z-20">
                     <span className="text-sm font-medium flex items-center gap-2">
                       <Rocket className="w-4 h-4" />
                       Growth Expert
                     </span>
                   </div>
-                  <div className="absolute bottom-8 right-8 bg-primary text-primary-foreground rounded-xl shadow-lg px-4 py-2 animate-bounce-subtle">
+                  <div className="absolute bottom-12 right-4 bg-primary text-primary-foreground rounded-xl shadow-lg px-4 py-2.5 animate-bounce-subtle z-20">
                     <span className="text-sm font-medium flex items-center gap-2">
                       <Lightbulb className="w-4 h-4" />
                       Creative
@@ -149,13 +144,13 @@ export default function Index() {
                   </div>
                   
                   {/* Character shadow */}
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-8 bg-foreground/10 blur-xl rounded-full" />
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-6 bg-foreground/8 blur-xl rounded-full" />
                   
-                  {/* Hero illustration - larger */}
+                  {/* Hero illustration */}
                   <img
                     src={heroIllustration}
                     alt="AI Marketing Professional helping grow your business"
-                    className="w-full max-w-lg mx-auto lg:max-w-xl drop-shadow-2xl relative z-10"
+                    className="w-full max-w-md mx-auto lg:max-w-lg drop-shadow-xl relative z-10"
                   />
                 </div>
               </div>
