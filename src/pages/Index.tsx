@@ -179,7 +179,7 @@ export default function Index() {
                   <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-6 bg-foreground/8 blur-xl rounded-full" />
                   
                   {/* Hero illustration */}
-                  <img alt="AI Marketing Professional helping grow your business" className="w-full max-w-md mx-auto lg:max-w-lg drop-shadow-xl relative z-10" src="/lovable-uploads/ffa87761-19a8-4aba-a2ad-009d8360bcd8.png" />
+                  <img alt="AI Marketing Professional helping grow your business" className="w-full max-w-md mx-auto lg:max-w-lg drop-shadow-xl relative z-10" src={heroIllustration} />
                 </div>
               </div>
             </AnimatedSection>
