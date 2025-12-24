@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
-import logo from "@/assets/logo.png";
 
 const quickLinks = [
   { name: "Home", path: "/" },
@@ -33,7 +32,10 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           {/* About */}
           <div className="space-y-4">
-            <img src={logo} alt="Revision Wave" className="h-10 w-auto" />
+            <div className="flex flex-col leading-none">
+              <span className="text-[10px] font-bold tracking-wider">REVISION</span>
+              <span className="text-lg font-extrabold tracking-tight">WAVE</span>
+            </div>
             <p className="text-secondary-foreground/80 text-sm leading-relaxed">
               Modern Marketing & Branding for the AI Era. Effortless growth without the manual grind.
             </p>
