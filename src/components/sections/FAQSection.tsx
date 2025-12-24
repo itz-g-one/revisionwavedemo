@@ -1,52 +1,30 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { MessageSquare } from "lucide-react";
 import { Link } from "react-router-dom";
-
-const faqs = [
-  {
-    question: "What services does Revision Wave offer?",
-    answer: "We offer a comprehensive suite of AI-powered marketing services including video editing, strategy consultation, performance marketing, website development, AI agents & automation, and AI-powered personal branding. Each service is designed to help you grow efficiently without the manual grind.",
-  },
-  {
-    question: "How does AI-powered personal branding work?",
-    answer: "Our AI-powered personal branding system follows a 5-step process: Trend Research to identify what's working, Script Creation using AI, Avatar & AI Voice generation, Professional Editing, and Auto Publishing. This creates a consistent content pipeline with minimal effort on your part.",
-  },
-  {
-    question: "What is your typical project timeline?",
-    answer: "Timelines vary based on project scope. Simple campaigns can launch in 1-2 weeks, while comprehensive branding and automation systems typically take 4-6 weeks. We'll provide a detailed timeline during our initial consultation.",
-  },
-  {
-    question: "How do you use AI in your services?",
-    answer: "We leverage AI across all our services - from content generation and video editing to analytics and automation. This allows us to deliver faster results, reduce costs, and provide insights that wouldn't be possible with traditional methods alone.",
-  },
-  {
-    question: "What industries do you work with?",
-    answer: "We work with creators, coaches, consultants, and growing businesses across various industries. Our AI-powered approach adapts to different niches while maintaining the personal touch that makes brands memorable.",
-  },
-];
-
+const faqs = [{
+  question: "What services does Revision Wave offer?",
+  answer: "We offer a comprehensive suite of AI-powered marketing services including video editing, strategy consultation, performance marketing, website development, AI agents & automation, and AI-powered personal branding. Each service is designed to help you grow efficiently without the manual grind."
+}, {
+  question: "How does AI-powered personal branding work?",
+  answer: "Our AI-powered personal branding system follows a 5-step process: Trend Research to identify what's working, Script Creation using AI, Avatar & AI Voice generation, Professional Editing, and Auto Publishing. This creates a consistent content pipeline with minimal effort on your part."
+}, {
+  question: "What is your typical project timeline?",
+  answer: "Timelines vary based on project scope. Simple campaigns can launch in 1-2 weeks, while comprehensive branding and automation systems typically take 4-6 weeks. We'll provide a detailed timeline during our initial consultation."
+}, {
+  question: "How do you use AI in your services?",
+  answer: "We leverage AI across all our services - from content generation and video editing to analytics and automation. This allows us to deliver faster results, reduce costs, and provide insights that wouldn't be possible with traditional methods alone."
+}, {
+  question: "What industries do you work with?",
+  answer: "We work with creators, coaches, consultants, and growing businesses across various industries. Our AI-powered approach adapts to different niches while maintaining the personal touch that makes brands memorable."
+}];
 export function FAQSection() {
-  return (
-    <section className="bg-background section-padding relative overflow-hidden">
+  return <section className="bg-background section-padding relative overflow-hidden">
       {/* Decorative coral wave shape in top right */}
       <div className="absolute top-0 right-0 w-32 h-32 md:w-48 md:h-48">
         <svg viewBox="0 0 200 200" className="w-full h-full">
-          <path
-            d="M100,0 C150,0 200,50 200,100 C200,50 150,0 100,0"
-            fill="hsl(var(--primary))"
-            opacity="0.8"
-          />
-          <path
-            d="M120,0 C170,20 200,70 200,120 C200,60 160,10 120,0"
-            fill="hsl(var(--primary))"
-            opacity="0.6"
-          />
+          <path d="M100,0 C150,0 200,50 200,100 C200,50 150,0 100,0" fill="hsl(var(--primary))" opacity="0.8" />
+          <path d="M120,0 C170,20 200,70 200,120 C200,60 160,10 120,0" fill="hsl(var(--primary))" opacity="0.6" />
         </svg>
       </div>
 
@@ -68,12 +46,7 @@ export function FAQSection() {
             </h2>
 
             <Accordion type="single" collapsible className="space-y-3">
-              {faqs.map((faq, index) => (
-                <AccordionItem
-                  key={index}
-                  value={`item-${index}`}
-                  className="border-l-4 border-l-primary/40 border-y-0 border-r-0 bg-card rounded-none px-0 data-[state=open]:border-l-primary"
-                >
+              {faqs.map((faq, index) => <AccordionItem key={index} value={`item-${index}`} className="border-l-4 border-l-primary/40 border-y-0 border-r-0 bg-card rounded-none px-0 data-[state=open]:border-l-primary">
                   <AccordionTrigger className="text-left font-medium py-4 px-5 hover:no-underline text-foreground hover:text-primary transition-colors [&[data-state=open]>svg]:rotate-45 [&>svg]:transition-transform">
                     <span className="text-base pr-4">{faq.question}</span>
                   </AccordionTrigger>
@@ -82,14 +55,13 @@ export function FAQSection() {
                       {faq.answer}
                     </p>
                   </AccordionContent>
-                </AccordionItem>
-              ))}
+                </AccordionItem>)}
             </Accordion>
           </div>
 
           {/* Right Column - Contact Card */}
           <div className="lg:pt-24">
-            <div className="bg-card border border-border rounded-2xl p-8 text-center">
+            <div className="bg-card border border-border rounded-2xl p-8 text-center py-[70px]">
               {/* Icon */}
               <div className="w-14 h-14 bg-foreground rounded-lg flex items-center justify-center mx-auto mb-6">
                 <MessageSquare className="w-7 h-7 text-background" />
@@ -110,6 +82,5 @@ export function FAQSection() {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 }
