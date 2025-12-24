@@ -22,7 +22,7 @@ export function Navbar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <img src={logo} alt="Revision Wave" className="h-10 w-auto" />
+            <img src={logo} alt="Revision Wave" className="h-8 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}
