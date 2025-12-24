@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Star, ArrowRight, Search, FileText, User, Video, Upload, Zap, Sparkles, Target, Users, ChevronDown } from "lucide-react";
+import { Star, ArrowRight, Search, FileText, User, Video, Upload, Zap, Sparkles, Target, Users, ChevronDown, Trophy, Rocket, ThumbsUp, Lightbulb, BarChart3 } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { ServiceCard, services } from "@/components/services/ServiceCard";
+import { EnhancedServiceCard, enhancedServices } from "@/components/services/EnhancedServiceCard";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { CTASection } from "@/components/sections/CTASection";
 import { AnimatedSection, StaggeredChildren } from "@/components/ui/animated-section";
 import { FloatingParticles, GlowOrbs } from "@/components/ui/floating-particles";
+import { FloatingIcons, DecorativeShape } from "@/components/ui/floating-icons";
 import { GradientText } from "@/components/ui/gradient-text";
 import { AnimatedCounter } from "@/components/ui/animated-counter";
 import heroIllustration from "@/assets/hero-illustration.png";
@@ -28,10 +29,10 @@ const whyUsCards = [
 ];
 
 const stats = [
-  { value: 150, suffix: "+", label: "Projects Completed" },
-  { value: 98, suffix: "%", label: "Client Satisfaction" },
-  { value: 50, suffix: "+", label: "Happy Clients" },
-  { value: 5, suffix: "x", label: "Average ROI" },
+  { value: 150, suffix: "+", label: "Projects Completed", icon: Trophy },
+  { value: 98, suffix: "%", label: "Client Satisfaction", icon: ThumbsUp },
+  { value: 50, suffix: "+", label: "Happy Clients", icon: Users },
+  { value: 5, suffix: "x", label: "Average ROI", icon: Rocket },
 ];
 
 export default function Index() {
@@ -39,20 +40,27 @@ export default function Index() {
     <div className="min-h-screen bg-background overflow-hidden">
       <Navbar />
       
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-16 lg:pt-40 lg:pb-24 section-padding overflow-hidden">
+      {/* Hero Section - Enhanced */}
+      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 section-padding overflow-hidden">
+        {/* Enhanced gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-off-white to-primary/5" />
+        
         {/* Background Effects */}
         <GlowOrbs />
-        <FloatingParticles count={15} />
+        <FloatingParticles count={20} />
+        
+        {/* Decorative shapes */}
+        <DecorativeShape variant="blob" size="lg" className="top-20 -right-20 opacity-30" />
+        <DecorativeShape variant="ring" size="md" className="bottom-40 -left-10 opacity-20" />
         
         {/* Animated grid pattern */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{
+        <div className="absolute inset-0 opacity-[0.02]" style={{
           backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--foreground)) 1px, transparent 0)`,
           backgroundSize: '40px 40px'
         }} />
 
         <div className="container-wide relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left Column - Text */}
             <AnimatedSection animation="fade-left">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6 shimmer">
@@ -60,65 +68,94 @@ export default function Index() {
                 Modern Marketing & Branding
               </span>
               
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-tight mb-6">
                 AI-Powered Marketing for the{" "}
                 <GradientText animate className="italic">New Era</GradientText>
               </h1>
               
-              <p className="text-lg text-muted-foreground max-w-lg mb-8">
+              <p className="text-lg lg:text-xl text-muted-foreground max-w-lg mb-8">
                 Transform your visions into waves of impact. We combine cutting-edge AI with creative strategy to deliver effortless growth without the manual grind.
               </p>
               
-              <div className="flex flex-wrap gap-4 mb-8">
-                <Button variant="hero" size="lg" asChild className="group animate-pulse-glow">
+              <div className="flex flex-wrap gap-4 mb-10">
+                <Button variant="hero" size="lg" asChild className="group animate-pulse-glow shadow-lg hover:shadow-xl transition-shadow">
                   <Link to="/contact">
                     Get a Quote
                     <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </Button>
-                <Button variant="heroOutline" size="lg" asChild className="group">
+                <Button variant="heroOutline" size="lg" asChild className="group hover:shadow-md transition-shadow">
                   <Link to="/services">
                     View Services
-                    <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="w-4 h-4 ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                   </Link>
                 </Button>
               </div>
 
-              {/* Stats Row */}
+              {/* Enhanced Stats Row with icons and hover effects */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8 border-t border-border">
                 {stats.map((stat, index) => (
-                  <div key={index} className="text-center sm:text-left">
-                    <div className="text-2xl md:text-3xl font-bold text-primary">
-                      <AnimatedCounter end={stat.value} suffix={stat.suffix} />
+                  <div 
+                    key={index} 
+                    className="group text-center sm:text-left p-3 rounded-xl hover:bg-card hover:shadow-md transition-all duration-300 cursor-default"
+                  >
+                    <div className="flex items-center gap-2 mb-1">
+                      <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                        <stat.icon className="w-4 h-4 text-primary" />
+                      </div>
+                      <div className="text-2xl md:text-3xl font-bold text-primary">
+                        <AnimatedCounter end={stat.value} suffix={stat.suffix} />
+                      </div>
                     </div>
-                    <div className="text-sm text-muted-foreground">{stat.label}</div>
+                    <div className="text-xs sm:text-sm text-muted-foreground ml-10 sm:ml-0">{stat.label}</div>
                   </div>
                 ))}
               </div>
             </AnimatedSection>
 
-            {/* Right Column - Illustration */}
+            {/* Right Column - Enhanced Illustration */}
             <AnimatedSection animation="fade-right" delay={200}>
               <div className="relative">
-                {/* Animated glow ring */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] rounded-full border-2 border-primary/20 animate-spin-slow" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] rounded-full border border-primary/10 animate-spin-slow" style={{ animationDirection: 'reverse', animationDuration: '30s' }} />
+                {/* Animated glow rings */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] rounded-full border-2 border-primary/20 animate-spin-slow" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] h-[130%] rounded-full border border-primary/10 animate-spin-slow" style={{ animationDirection: 'reverse', animationDuration: '30s' }} />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] rounded-full border border-primary/5 animate-spin-slow" style={{ animationDuration: '40s' }} />
                 
-                <div className="absolute -top-8 -right-8 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-pulse-glow"></div>
+                {/* Glow effect behind character */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-pulse-glow"></div>
+                
                 <div className="relative">
-                  <div className="absolute top-10 right-10 bg-card rounded-xl shadow-card px-4 py-2 animate-float border border-border gradient-border">
-                    <span className="text-sm font-medium text-foreground">✨ AI Marketing</span>
+                  {/* Floating icons around the character */}
+                  <FloatingIcons />
+                  
+                  {/* Floating tag badges */}
+                  <div className="absolute top-8 right-4 bg-card rounded-xl shadow-lg px-4 py-2 animate-float border border-border gradient-border">
+                    <span className="text-sm font-medium text-foreground flex items-center gap-2">
+                      <Sparkles className="w-4 h-4 text-primary" />
+                      AI Marketing
+                    </span>
                   </div>
-                  <div className="absolute bottom-20 left-0 bg-secondary text-secondary-foreground rounded-xl shadow-card px-4 py-2 animate-float-delayed">
-                    <span className="text-sm font-medium">🚀 Growth Expert</span>
+                  <div className="absolute bottom-24 -left-4 bg-secondary text-secondary-foreground rounded-xl shadow-lg px-4 py-2 animate-float-delayed">
+                    <span className="text-sm font-medium flex items-center gap-2">
+                      <Rocket className="w-4 h-4" />
+                      Growth Expert
+                    </span>
                   </div>
-                  <div className="absolute bottom-10 right-0 bg-primary text-primary-foreground rounded-xl shadow-card px-4 py-2 animate-bounce-subtle">
-                    <span className="text-sm font-medium">💡 Creative</span>
+                  <div className="absolute bottom-8 right-8 bg-primary text-primary-foreground rounded-xl shadow-lg px-4 py-2 animate-bounce-subtle">
+                    <span className="text-sm font-medium flex items-center gap-2">
+                      <Lightbulb className="w-4 h-4" />
+                      Creative
+                    </span>
                   </div>
+                  
+                  {/* Character shadow */}
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-8 bg-foreground/10 blur-xl rounded-full" />
+                  
+                  {/* Hero illustration - larger */}
                   <img
                     src={heroIllustration}
-                    alt="AI Marketing Professional"
-                    className="w-full max-w-md mx-auto lg:max-w-lg drop-shadow-2xl"
+                    alt="AI Marketing Professional helping grow your business"
+                    className="w-full max-w-lg mx-auto lg:max-w-xl drop-shadow-2xl relative z-10"
                   />
                 </div>
               </div>
@@ -152,62 +189,76 @@ export default function Index() {
         </section>
       </AnimatedSection>
 
-      {/* Marquee Strip */}
-      <section className="py-4 bg-primary overflow-hidden relative">
+      {/* Enhanced Marquee Strip */}
+      <section className="py-5 bg-primary overflow-hidden relative shadow-lg">
         <div className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-primary animate-gradient" />
         <div className="flex whitespace-nowrap relative z-10">
-          <div className="marquee flex gap-8">
+          <div className="marquee flex gap-10">
             {["App Design", "Website Design", "Dashboard", "Wireframe", "AI Automation", "Personal Branding", "Video Editing", "Performance Marketing", "App Design", "Website Design", "Dashboard", "Wireframe", "AI Automation", "Personal Branding", "Video Editing", "Performance Marketing"].map((item, i) => (
-              <span key={i} className="flex items-center gap-4 text-primary-foreground font-medium">
+              <span key={i} className="flex items-center gap-4 text-primary-foreground font-semibold text-lg">
                 {item}
-                <span className="text-primary-foreground/60">✦</span>
+                <span className="text-primary-foreground/80">
+                  <Sparkles className="w-4 h-4" />
+                </span>
               </span>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
+      {/* Enhanced Services Section */}
       <section className="section-padding relative">
         <FloatingParticles count={10} className="opacity-50" />
+        <DecorativeShape variant="circle" size="lg" className="-top-20 -right-20 opacity-20" />
+        <DecorativeShape variant="blob" size="md" className="bottom-0 -left-20 opacity-15" />
+        
         <div className="container-wide relative z-10">
-          <AnimatedSection className="text-center mb-12">
+          <AnimatedSection className="text-center mb-16">
             <span className="text-primary text-sm font-medium mb-2 inline-block">— Our Services</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
               What We <GradientText animate className="italic">Offer</GradientText>
             </h2>
-            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto text-lg">
               Comprehensive AI-powered marketing solutions designed to accelerate your growth
             </p>
           </AnimatedSection>
 
           <StaggeredChildren
-            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
             animation="fade-up"
             staggerDelay={100}
           >
-            {services.map((service, index) => (
-              <div key={index} className="card-glow rounded-2xl">
-                <ServiceCard {...service} />
+            {enhancedServices.map((service, index) => (
+              <div key={index}>
+                <EnhancedServiceCard {...service} />
               </div>
             ))}
           </StaggeredChildren>
         </div>
       </section>
 
-      {/* AI-Powered Personal Branding Section */}
+      {/* AI-Powered Personal Branding Section - Enhanced */}
       <section className="section-padding bg-off-white relative overflow-hidden">
+        {/* Decorative background */}
         <div className="absolute inset-0 opacity-[0.02]" style={{
           backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--foreground)) 1px, transparent 0)`,
           backgroundSize: '30px 30px'
         }} />
+        <DecorativeShape variant="ring" size="lg" className="top-10 -right-20 opacity-20" />
+        
         <div className="container-wide relative z-10">
-          <AnimatedSection className="text-center mb-12">
+          <AnimatedSection className="text-center mb-16">
+            {/* Decorative element above heading */}
+            <div className="flex justify-center mb-4">
+              <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                <Sparkles className="w-5 h-5 text-primary" />
+              </div>
+            </div>
             <span className="text-primary text-sm font-medium mb-2 inline-block">— Featured System</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
               AI-Powered <GradientText animate className="italic">Personal Branding</GradientText>
             </h2>
-            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto text-lg">
               Build your personal brand on autopilot with our 5-step AI system
             </p>
           </AnimatedSection>
@@ -226,17 +277,23 @@ export default function Index() {
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 
                 <div className="relative z-10">
-                  <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors group-hover:scale-110 duration-300">
-                    <step.icon className="w-6 h-6 text-primary" />
+                  {/* Large step number */}
+                  <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-primary text-primary-foreground text-sm font-bold flex items-center justify-center shadow-lg">
+                    {index + 1}
                   </div>
-                  <div className="text-xs font-bold text-primary mb-2">Step {index + 1}</div>
+                  
+                  {/* Enhanced icon with gradient background */}
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:from-primary/30 group-hover:to-primary/20 transition-all group-hover:scale-110 duration-300 shadow-md">
+                    <step.icon className="w-7 h-7 text-primary" />
+                  </div>
+                  
                   <h3 className="font-bold text-foreground mb-2 group-hover:text-primary transition-colors">{step.title}</h3>
                   <p className="text-muted-foreground text-sm">{step.description}</p>
                 </div>
 
-                {/* Connection line */}
+                {/* Connection line - dashed */}
                 {index < brandingSteps.length - 1 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-3 w-6 h-0.5 bg-gradient-to-r from-primary/50 to-primary/20" />
+                  <div className="hidden lg:block absolute top-1/2 -right-3 w-6 border-t-2 border-dashed border-primary/40" />
                 )}
               </div>
             ))}
@@ -244,38 +301,51 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Why Revision Wave */}
+      {/* Why Revision Wave - Enhanced */}
       <section className="section-padding relative">
         <GlowOrbs />
+        <DecorativeShape variant="blob" size="lg" className="-bottom-20 -right-20 opacity-20" />
+        
         <div className="container-wide relative z-10">
-          <AnimatedSection className="text-center mb-12">
+          <AnimatedSection className="text-center mb-16">
             <span className="text-primary text-sm font-medium mb-2 inline-block">— Why Choose Us</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
               Why <GradientText animate className="italic">Revision Wave</GradientText>?
             </h2>
           </AnimatedSection>
 
           <StaggeredChildren
-            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
+            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8"
             animation="fade-up"
             staggerDelay={100}
           >
             {whyUsCards.map((card, index) => (
               <div
                 key={index}
-                className="group bg-card rounded-2xl p-6 text-center card-hover border border-border relative overflow-hidden"
+                className="group bg-card rounded-2xl p-8 text-center card-hover border border-border relative overflow-hidden"
               >
-                {/* Animated border gradient */}
+                {/* Animated border gradient on hover */}
                 <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/20 via-transparent to-primary/20 animate-spin-slow" />
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/20 via-transparent to-primary/20" />
                 </div>
                 
+                {/* Background pattern on hover */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity" style={{
+                  backgroundImage: `radial-gradient(circle at 2px 2px, hsl(var(--primary)) 1px, transparent 0)`,
+                  backgroundSize: '16px 16px'
+                }} />
+                
                 <div className="relative z-10">
-                  <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-button">
-                    <card.icon className="w-6 h-6 text-primary-foreground" />
+                  {/* Enhanced icon circle with pulse glow */}
+                  <div className="relative mx-auto w-fit mb-5">
+                    <div className="absolute inset-0 bg-primary/30 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity animate-pulse-glow" />
+                    <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-button relative">
+                      <card.icon className="w-7 h-7 text-primary-foreground" />
+                    </div>
                   </div>
-                  <h3 className="font-bold text-foreground mb-2 group-hover:text-primary transition-colors">{card.title}</h3>
-                  <p className="text-muted-foreground text-sm">{card.description}</p>
+                  
+                  <h3 className="font-bold text-lg text-foreground mb-3 group-hover:text-primary transition-colors">{card.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{card.description}</p>
                 </div>
               </div>
             ))}
