@@ -1,67 +1,86 @@
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+import { Facebook, Linkedin, Youtube, MessageCircle } from "lucide-react";
+import logo from "@/assets/logo.png";
 
-const quickLinks = [
+const companyLinks = [
   { name: "Home", path: "/" },
   { name: "Who We Are", path: "/about" },
-  { name: "Services", path: "/services" },
   { name: "Portfolio", path: "/portfolio" },
   { name: "Contact", path: "/contact" },
 ];
 
-const services = [
-  "Video Editing",
-  "Strategy Consultation",
-  "Performance Marketing",
-  "Website Development",
-  "AI Agents & Automation",
-  "AI-Powered Personal Branding",
+const serviceLinks = [
+  { name: "Video Editing", path: "/services" },
+  { name: "Strategy Consultation", path: "/services" },
+  { name: "Performance Marketing", path: "/services" },
+  { name: "Website Development", path: "/services" },
+];
+
+const supportLinks = [
+  { name: "FAQs", path: "/#faq" },
+  { name: "Contact Us", path: "/contact" },
+  { name: "About Us", path: "/about" },
 ];
 
 const socialLinks = [
   { icon: Facebook, href: "#", label: "Facebook" },
-  { icon: Twitter, href: "#", label: "Twitter" },
   { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Instagram, href: "#", label: "Instagram" },
+  { icon: Youtube, href: "#", label: "YouTube" },
+  { icon: MessageCircle, href: "#", label: "WhatsApp" },
 ];
 
 export function Footer() {
   return (
-    <footer className="bg-secondary text-secondary-foreground">
-      <div className="container-wide section-padding">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
-          {/* About */}
-          <div className="space-y-4">
-            <div className="flex flex-col leading-none">
-              <span className="text-[10px] font-bold tracking-wider">REVISION</span>
-              <span className="text-lg font-extrabold tracking-tight">WAVE</span>
-            </div>
-            <p className="text-secondary-foreground/80 text-sm leading-relaxed">
-              Modern Marketing & Branding for the AI Era. Effortless growth without the manual grind.
+    <footer className="bg-muted/50 text-foreground relative overflow-hidden">
+      {/* Decorative Wave Illustration */}
+      <div className="absolute bottom-0 left-0 w-80 h-48 pointer-events-none opacity-60">
+        <svg viewBox="0 0 400 200" className="w-full h-full">
+          {/* Wave shapes */}
+          <path
+            d="M0,150 Q50,120 100,140 T200,130 T300,150 T400,140 L400,200 L0,200 Z"
+            className="fill-primary/20"
+          />
+          <path
+            d="M0,160 Q60,140 120,155 T240,145 T360,160 T400,155 L400,200 L0,200 Z"
+            className="fill-primary/30"
+          />
+          {/* Decorative circles/flowers */}
+          <circle cx="60" cy="120" r="12" className="fill-primary/40" />
+          <circle cx="45" cy="135" r="8" className="fill-accent/50" />
+          <circle cx="80" cy="110" r="6" className="fill-primary/60" />
+          <circle cx="120" cy="125" r="10" className="fill-accent/40" />
+          <circle cx="100" cy="140" r="7" className="fill-primary/30" />
+          <circle cx="150" cy="115" r="9" className="fill-primary/50" />
+          <circle cx="170" cy="130" r="5" className="fill-accent/60" />
+          <circle cx="35" cy="150" r="6" className="fill-primary/40" />
+        </svg>
+      </div>
+
+      <div className="container-wide py-12 lg:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
+          {/* Logo Section */}
+          <div className="lg:col-span-2 space-y-4 relative z-10">
+            <Link to="/" className="flex items-center gap-2">
+              <img src={logo} alt="Revision Wave" className="h-10 w-auto" />
+              <div className="flex flex-col leading-none">
+                <span className="text-[10px] font-bold tracking-wider text-primary">REVISION</span>
+                <span className="text-lg font-extrabold tracking-tight">WAVE</span>
+              </div>
+            </Link>
+            <p className="text-muted-foreground text-sm max-w-xs">
+              Modern Marketing & Branding for the AI Era.
             </p>
-            <div className="flex gap-3 pt-2">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  aria-label={social.label}
-                  className="w-10 h-10 rounded-full bg-secondary-foreground/10 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"
-                >
-                  <social.icon className="w-5 h-5" />
-                </a>
-              ))}
-            </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Our Company */}
           <div>
-            <h4 className="font-bold text-lg mb-4">Quick Links</h4>
-            <ul className="space-y-3">
-              {quickLinks.map((link) => (
-                <li key={link.path}>
+            <h4 className="font-semibold text-sm mb-4 text-foreground">Our Company</h4>
+            <ul className="space-y-2.5">
+              {companyLinks.map((link) => (
+                <li key={link.path + link.name}>
                   <Link
                     to={link.path}
-                    className="text-secondary-foreground/80 hover:text-primary transition-colors text-sm"
+                    className="text-muted-foreground hover:text-primary transition-colors text-sm"
                   >
                     {link.name}
                   </Link>
@@ -72,57 +91,56 @@ export function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="font-bold text-lg mb-4">Services</h4>
-            <ul className="space-y-3">
-              {services.map((service) => (
-                <li key={service}>
+            <h4 className="font-semibold text-sm mb-4 text-foreground">Services</h4>
+            <ul className="space-y-2.5">
+              {serviceLinks.map((link) => (
+                <li key={link.name}>
                   <Link
-                    to="/services"
-                    className="text-secondary-foreground/80 hover:text-primary transition-colors text-sm"
+                    to={link.path}
+                    className="text-muted-foreground hover:text-primary transition-colors text-sm"
                   >
-                    {service}
+                    {link.name}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Support */}
           <div>
-            <h4 className="font-bold text-lg mb-4">Contact Info</h4>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <Phone className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                <span className="text-secondary-foreground/80 text-sm">+1 (555) 123-4567</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <Mail className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                <span className="text-secondary-foreground/80 text-sm">hello@revisionwave.com</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                <span className="text-secondary-foreground/80 text-sm">
-                  123 Innovation Drive<br />
-                  San Francisco, CA 94102
-                </span>
-              </li>
+            <h4 className="font-semibold text-sm mb-4 text-foreground">Support</h4>
+            <ul className="space-y-2.5">
+              {supportLinks.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    to={link.path}
+                    className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-secondary-foreground/10">
+        <div className="mt-12 pt-6 border-t border-border/50">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-secondary-foreground/60 text-sm">
-              © {new Date().getFullYear()} Revision Wave. All rights reserved.
+            <p className="text-muted-foreground text-sm">
+              ©{new Date().getFullYear()} Revision Wave. All rights reserved.
             </p>
-            <div className="flex gap-6">
-              <Link to="#" className="text-secondary-foreground/60 hover:text-primary text-sm transition-colors">
-                Privacy Policy
-              </Link>
-              <Link to="#" className="text-secondary-foreground/60 hover:text-primary text-sm transition-colors">
-                Terms of Service
-              </Link>
+            <div className="flex gap-3">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  aria-label={social.label}
+                  className="w-8 h-8 rounded-full bg-foreground text-background flex items-center justify-center hover:bg-primary transition-colors"
+                >
+                  <social.icon className="w-4 h-4" />
+                </a>
+              ))}
             </div>
           </div>
         </div>
