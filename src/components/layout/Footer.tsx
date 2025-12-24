@@ -31,7 +31,7 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-muted/50 text-foreground relative overflow-hidden">
+    <footer className="bg-muted/50 text-foreground relative overflow-hidden pb-14 md:pb-0">
       {/* Decorative Wave Illustration - hidden on mobile */}
       <div className="absolute bottom-0 left-0 w-48 md:w-80 h-32 md:h-48 pointer-events-none opacity-40 md:opacity-60 hidden sm:block">
         <svg viewBox="0 0 400 200" className="w-full h-full">
