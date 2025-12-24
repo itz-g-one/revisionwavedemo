@@ -19,7 +19,7 @@ export function Navbar() {
     <header className="fixed top-4 left-0 right-0 z-50 px-4">
       <div className="max-w-2xl mx-auto">
         <nav 
-          className="flex items-center justify-between h-12 px-3 md:px-5 rounded-full bg-secondary shadow-[0_4px_16px_rgba(0,0,0,0.08)]"
+          className="flex items-center justify-between h-12 px-3 md:px-5 rounded-full bg-secondary/80 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] border border-secondary-foreground/5"
         >
           {/* Left - Logo */}
           <Link to="/" className="flex items-center gap-1.5">

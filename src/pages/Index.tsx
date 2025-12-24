@@ -79,49 +79,58 @@ export default function Index() {
       
       {/* Hero Section - Enhanced */}
       <section id="hero" className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 section-padding overflow-hidden">
-        {/* Enhanced gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-off-white to-primary/5" />
+        {/* Gradient mesh background */}
+        <div className="absolute inset-0 gradient-mesh" />
+        
+        {/* Animated gradient orb */}
+        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px] animate-morph opacity-60" />
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-accent/15 rounded-full blur-[100px] animate-morph opacity-40" style={{ animationDelay: '-4s' }} />
         
         {/* Background Effects */}
         <GlowOrbs />
-        <FloatingParticles count={20} />
+        <FloatingParticles count={25} />
         
         {/* Decorative shapes */}
-        <DecorativeShape variant="blob" size="lg" className="top-20 -right-20 opacity-30" />
-        <DecorativeShape variant="ring" size="md" className="bottom-40 -left-10 opacity-20" />
+        <DecorativeShape variant="blob" size="lg" className="top-20 -right-20 opacity-40 animate-morph" />
+        <DecorativeShape variant="ring" size="md" className="bottom-40 -left-10 opacity-30 animate-spin-slow" />
         
         {/* Animated grid pattern */}
-        <div className="absolute inset-0 opacity-[0.02]" style={{
-        backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--foreground)) 1px, transparent 0)`,
-        backgroundSize: '40px 40px'
+        <div className="absolute inset-0 opacity-[0.03]" style={{
+        backgroundImage: `linear-gradient(hsl(var(--primary) / 0.1) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--primary) / 0.1) 1px, transparent 1px)`,
+        backgroundSize: '60px 60px'
       }} />
 
         <div className="container-wide relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left Column - Text */}
             <AnimatedSection animation="fade-left">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6 shimmer">
-                <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6 shimmer border border-primary/20 backdrop-blur-sm">
+                <span className="w-2 h-2 rounded-full bg-primary animate-pulse shadow-[0_0_10px_hsl(var(--primary))]"></span>
                 Modern Marketing & Branding
               </span>
               
-              <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-tight mb-6">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-[1.1] mb-6 tracking-tight">
                 AI-Powered Marketing for the{" "}
-                <GradientText animate className="italic">New Era</GradientText>
+                <span className="relative">
+                  <GradientText animate className="italic">New Era</GradientText>
+                  <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 12" fill="none">
+                    <path d="M2 10C50 4 150 4 198 10" stroke="hsl(var(--primary))" strokeWidth="3" strokeLinecap="round" className="animate-draw" style={{ strokeDasharray: 200, strokeDashoffset: 0 }} />
+                  </svg>
+                </span>
               </h1>
               
-              <p className="text-lg lg:text-xl text-muted-foreground max-w-lg mb-8">
+              <p className="text-lg lg:text-xl text-muted-foreground max-w-lg mb-8 leading-relaxed">
                 Transform your visions into waves of impact. We combine cutting-edge AI with creative strategy to deliver effortless growth without the manual grind.
               </p>
               
               <div className="flex flex-wrap gap-4 mb-10">
-                <Button variant="hero" size="lg" asChild className="group animate-pulse-glow shadow-lg hover:shadow-xl transition-shadow">
+                <Button variant="hero" size="lg" asChild className="group shadow-[0_0_30px_hsl(var(--primary)/0.4)] hover:shadow-[0_0_50px_hsl(var(--primary)/0.6)] transition-all duration-500">
                   <Link to="/contact">
                     Get a Quote
                     <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </Button>
-                <Button variant="heroOutline" size="lg" asChild className="group hover:shadow-md transition-shadow">
+                <Button variant="heroOutline" size="lg" asChild className="group hover:shadow-lg transition-all duration-500 hover:border-primary/50">
                   <Link to="/services">
                     View Services
                     <ArrowRight className="w-4 h-4 ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
@@ -193,19 +202,21 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Trust Strip */}
+      {/* Trust Strip - Enhanced */}
       <AnimatedSection animation="fade">
-        <section className="py-6 bg-secondary relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/90 to-secondary" />
+        <section className="py-8 bg-secondary relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/95 to-secondary" />
+          {/* Subtle animated shine */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent animate-shimmer-horizontal" />
           <div className="container-wide relative z-10">
-            <div className="flex flex-wrap items-center justify-center gap-4 text-secondary-foreground">
-              <div className="flex gap-1">
-                {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-primary text-primary animate-pulse" style={{
-                animationDelay: `${i * 100}ms`
+            <div className="flex flex-wrap items-center justify-center gap-6 text-secondary-foreground">
+              <div className="flex gap-1.5">
+                {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-primary text-primary drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]" style={{
+                animationDelay: `${i * 150}ms`
               }} />)}
               </div>
-              <span className="text-sm font-medium">
-                Trusted by creators, coaches, and growing businesses worldwide
+              <span className="text-sm font-medium tracking-wide">
+                Trusted by <span className="text-primary font-bold">500+</span> creators, coaches, and growing businesses worldwide
               </span>
             </div>
           </div>
