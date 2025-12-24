@@ -7,40 +7,38 @@ import { GradientText } from "@/components/ui/gradient-text";
 import { Target, Users, Lightbulb, Award } from "lucide-react";
 import aboutIllustration from "@/assets/about-illustration.png";
 import teamIllustration from "@/assets/team-illustration.png";
-
-const values = [
-  {
-    icon: Target,
-    title: "Results-Driven",
-    description: "Every strategy we create is focused on delivering measurable outcomes for your business.",
-  },
-  {
-    icon: Users,
-    title: "Client-Centric",
-    description: "Your success is our priority. We work as an extension of your team.",
-  },
-  {
-    icon: Lightbulb,
-    title: "Innovation First",
-    description: "We stay ahead of trends and leverage the latest AI technologies for your benefit.",
-  },
-  {
-    icon: Award,
-    title: "Excellence Always",
-    description: "Quality is non-negotiable. We deliver premium work, every time.",
-  },
-];
-
-const stats = [
-  { number: "50+", label: "Clients Served" },
-  { number: "200+", label: "Projects Completed" },
-  { number: "95%", label: "Client Satisfaction" },
-  { number: "3x", label: "Average ROI" },
-];
-
+const values = [{
+  icon: Target,
+  title: "Results-Driven",
+  description: "Every strategy we create is focused on delivering measurable outcomes for your business."
+}, {
+  icon: Users,
+  title: "Client-Centric",
+  description: "Your success is our priority. We work as an extension of your team."
+}, {
+  icon: Lightbulb,
+  title: "Innovation First",
+  description: "We stay ahead of trends and leverage the latest AI technologies for your benefit."
+}, {
+  icon: Award,
+  title: "Excellence Always",
+  description: "Quality is non-negotiable. We deliver premium work, every time."
+}];
+const stats = [{
+  number: "50+",
+  label: "Clients Served"
+}, {
+  number: "200+",
+  label: "Projects Completed"
+}, {
+  number: "95%",
+  label: "Client Satisfaction"
+}, {
+  number: "3x",
+  label: "Average ROI"
+}];
 export default function About() {
-  return (
-    <div className="min-h-screen bg-background overflow-hidden">
+  return <div className="min-h-screen bg-background overflow-hidden">
       <Navbar />
 
       {/* Hero */}
@@ -63,11 +61,7 @@ export default function About() {
             <AnimatedSection animation="fade-right" delay={200}>
               <div className="relative">
                 <div className="absolute -top-8 -right-8 w-64 h-64 bg-primary/20 rounded-full blur-3xl animate-pulse-glow" />
-                <img 
-                  src={teamIllustration} 
-                  alt="Our Creative Team" 
-                  className="w-full max-w-md mx-auto lg:max-w-lg drop-shadow-2xl relative z-10"
-                />
+                <img src={teamIllustration} alt="Our Creative Team" className="w-full max-w-md mx-auto lg:max-w-lg drop-shadow-2xl relative z-10" />
               </div>
             </AnimatedSection>
           </div>
@@ -78,17 +72,11 @@ export default function About() {
       <section className="py-12 bg-secondary relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/90 to-secondary" />
         <div className="container-wide relative z-10">
-          <StaggeredChildren
-            className="grid grid-cols-2 lg:grid-cols-4 gap-8"
-            animation="scale"
-            staggerDelay={100}
-          >
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center group">
+          <StaggeredChildren className="grid grid-cols-2 lg:grid-cols-4 gap-8" animation="scale" staggerDelay={100}>
+            {stats.map((stat, index) => <div key={index} className="text-center group">
                 <div className="text-4xl md:text-5xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform">{stat.number}</div>
                 <div className="text-secondary-foreground/80 text-sm">{stat.label}</div>
-              </div>
-            ))}
+              </div>)}
           </StaggeredChildren>
         </div>
       </section>
@@ -124,11 +112,7 @@ export default function About() {
               <div className="relative">
                 <div className="absolute -bottom-4 -left-4 w-48 h-48 bg-primary/15 rounded-full blur-2xl" />
                 <div className="bg-off-white rounded-3xl p-6 relative z-10">
-                  <img 
-                    src={aboutIllustration} 
-                    alt="Marketing Analytics Professional" 
-                    className="w-full rounded-2xl drop-shadow-lg"
-                  />
+                  <img alt="Marketing Analytics Professional" className="w-full rounded-2xl drop-shadow-lg object-cover" src="/lovable-uploads/c3d94441-a731-4c13-b578-61bf61c295d0.png" />
                 </div>
               </div>
             </AnimatedSection>
@@ -146,23 +130,14 @@ export default function About() {
             </h2>
           </AnimatedSection>
 
-          <StaggeredChildren
-            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
-            animation="fade-up"
-            staggerDelay={100}
-          >
-            {values.map((value, index) => (
-              <div
-                key={index}
-                className="bg-card rounded-2xl p-6 text-center card-hover border border-border"
-              >
+          <StaggeredChildren className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6" animation="fade-up" staggerDelay={100}>
+            {values.map((value, index) => <div key={index} className="bg-card rounded-2xl p-6 text-center card-hover border border-border">
                 <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center mx-auto mb-4">
                   <value.icon className="w-6 h-6 text-primary-foreground" />
                 </div>
                 <h3 className="font-bold text-foreground mb-2">{value.title}</h3>
                 <p className="text-muted-foreground text-sm">{value.description}</p>
-              </div>
-            ))}
+              </div>)}
           </StaggeredChildren>
         </div>
       </section>
@@ -174,6 +149,5 @@ export default function About() {
 
       {/* Footer */}
       <Footer />
-    </div>
-  );
+    </div>;
 }
