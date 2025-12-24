@@ -1,29 +1,28 @@
 import { useState, useEffect, useCallback } from "react";
-import { Home, Briefcase, Sparkles, Award, Mail, HelpCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface NavSection {
   id: string;
-  icon: React.ElementType;
+  emoji: string;
   label: string;
 }
 
 const sections: NavSection[] = [
-  { id: "hero", icon: Home, label: "Home" },
-  { id: "services", icon: Briefcase, label: "Services" },
-  { id: "personal-branding", icon: Sparkles, label: "Personal Branding" },
-  { id: "why-us", icon: Award, label: "Why Us" },
-  { id: "contact", icon: Mail, label: "Contact" },
-  { id: "faq", icon: HelpCircle, label: "FAQs" },
+  { id: "hero", emoji: "🏠", label: "Home" },
+  { id: "services", emoji: "⚡", label: "Services" },
+  { id: "personal-branding", emoji: "✨", label: "Branding" },
+  { id: "why-us", emoji: "🏆", label: "Why Us" },
+  { id: "contact", emoji: "💬", label: "Contact" },
+  { id: "faq", emoji: "❓", label: "FAQs" },
 ];
 
 // Simplified sections for mobile (5 items)
 const mobileSections: NavSection[] = [
-  { id: "hero", icon: Home, label: "Home" },
-  { id: "services", icon: Briefcase, label: "Services" },
-  { id: "why-us", icon: Award, label: "Why Us" },
-  { id: "contact", icon: Mail, label: "Contact" },
-  { id: "faq", icon: HelpCircle, label: "FAQs" },
+  { id: "hero", emoji: "🏠", label: "Home" },
+  { id: "services", emoji: "⚡", label: "Services" },
+  { id: "why-us", emoji: "🏆", label: "Why Us" },
+  { id: "contact", emoji: "💬", label: "Contact" },
+  { id: "faq", emoji: "❓", label: "FAQs" },
 ];
 
 export function VerticalSidebarNav() {
@@ -69,7 +68,7 @@ export function VerticalSidebarNav() {
     setActiveSection(id);
     const element = document.getElementById(id);
     if (element) {
-      const offset = 80; // Account for fixed header
+      const offset = 80;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
 
@@ -82,88 +81,83 @@ export function VerticalSidebarNav() {
 
   return (
     <>
-      {/* Desktop Vertical Sidebar */}
+      {/* Desktop Vertical Sidebar - Compact & Elegant */}
       <nav
         className={cn(
-          "fixed right-5 lg:right-10 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col items-center transition-all duration-500",
+          "fixed right-4 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col items-center transition-all duration-500",
           isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-4"
         )}
         aria-label="Section navigation"
       >
-        {/* Connecting line */}
-        <div 
-          className="absolute top-3 bottom-3 w-[3px] rounded-full bg-gradient-to-b from-primary via-primary/50 to-secondary"
-          style={{ zIndex: -1 }}
-        />
+        {/* Glass container */}
+        <div className="bg-card/80 backdrop-blur-md rounded-full p-1.5 border border-border/50 shadow-lg">
+          {/* Connecting line inside */}
+          <div className="absolute left-1/2 -translate-x-1/2 top-4 bottom-4 w-0.5 rounded-full bg-gradient-to-b from-primary/30 via-primary/20 to-secondary/30" />
+          
+          <div className="flex flex-col gap-1 relative">
+            {sections.map((section) => {
+              const isActive = activeSection === section.id;
 
-        <div className="flex flex-col gap-4">
-          {sections.map((section) => {
-            const isActive = activeSection === section.id;
-            const Icon = section.icon;
-
-            return (
-              <div key={section.id} className="relative group">
-                {/* Tooltip */}
-                <div
-                  className={cn(
-                    "absolute right-full mr-3 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-md whitespace-nowrap",
-                    "bg-secondary text-secondary-foreground text-sm font-medium",
-                    "opacity-0 translate-x-2 pointer-events-none transition-all duration-200",
-                    "group-hover:opacity-100 group-hover:translate-x-0"
-                  )}
-                >
-                  {section.label}
-                  {/* Arrow */}
-                  <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-full">
-                    <div className="border-8 border-transparent border-l-secondary" />
-                  </div>
-                </div>
-
-                {/* Icon Button */}
-                <button
-                  onClick={() => handleClick(section.id)}
-                  aria-label={`Navigate to ${section.label} section`}
-                  role="button"
-                  tabIndex={0}
-                  className={cn(
-                    "w-10 h-10 lg:w-12 lg:h-12 rounded-full flex items-center justify-center transition-all duration-300",
-                    "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
-                    isActive
-                      ? "bg-primary border-2 border-primary shadow-lg scale-110"
-                      : "bg-card border-2 border-border opacity-70 hover:opacity-100 hover:bg-primary/10 hover:border-primary hover:scale-105"
-                  )}
-                  style={{
-                    boxShadow: isActive
-                      ? "0 4px 12px hsla(45, 100%, 51%, 0.4)"
-                      : undefined,
-                  }}
-                >
-                  <Icon
+              return (
+                <div key={section.id} className="relative group">
+                  {/* Tooltip */}
+                  <div
                     className={cn(
-                      "w-4 h-4 lg:w-5 lg:h-5 transition-colors duration-300",
-                      isActive ? "text-secondary" : "text-muted-foreground group-hover:text-secondary"
+                      "absolute right-full mr-2 top-1/2 -translate-y-1/2 px-2 py-1 rounded-md whitespace-nowrap",
+                      "bg-secondary text-secondary-foreground text-xs font-medium",
+                      "opacity-0 translate-x-1 pointer-events-none transition-all duration-200",
+                      "group-hover:opacity-100 group-hover:translate-x-0"
                     )}
-                  />
-                </button>
-              </div>
-            );
-          })}
+                  >
+                    {section.label}
+                    <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-full">
+                      <div className="border-4 border-transparent border-l-secondary" />
+                    </div>
+                  </div>
+
+                  {/* Icon Button - Smaller */}
+                  <button
+                    onClick={() => handleClick(section.id)}
+                    aria-label={`Navigate to ${section.label} section`}
+                    className={cn(
+                      "w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300",
+                      "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1",
+                      isActive
+                        ? "bg-primary shadow-md scale-105"
+                        : "bg-transparent hover:bg-primary/10 hover:scale-105"
+                    )}
+                    style={{
+                      boxShadow: isActive
+                        ? "0 2px 8px hsla(45, 100%, 51%, 0.35)"
+                        : undefined,
+                    }}
+                  >
+                    <span className={cn(
+                      "text-sm transition-transform duration-300",
+                      isActive ? "scale-110" : "grayscale-[30%] group-hover:grayscale-0"
+                    )}>
+                      {section.emoji}
+                    </span>
+                  </button>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </nav>
 
-      {/* Mobile Bottom Navigation */}
+      {/* Mobile Bottom Navigation - Compact */}
       <nav
         className={cn(
           "fixed bottom-0 left-0 right-0 z-50 md:hidden transition-all duration-500",
-          "bg-card/95 backdrop-blur-md border-t border-border shadow-lg",
+          "bg-card/95 backdrop-blur-md border-t border-border/50 shadow-lg",
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
         )}
         aria-label="Mobile section navigation"
       >
-        <div className="flex items-center justify-around h-16 px-2">
+        <div className="flex items-center justify-around h-14 px-1">
           {mobileSections.map((section) => {
             const isActive = activeSection === section.id;
-            const Icon = section.icon;
 
             return (
               <button
@@ -171,46 +165,40 @@ export function VerticalSidebarNav() {
                 onClick={() => handleClick(section.id)}
                 aria-label={`Navigate to ${section.label} section`}
                 className={cn(
-                  "flex flex-col items-center justify-center gap-0.5 py-2 px-3 rounded-lg transition-all duration-300",
-                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary",
-                  isActive
-                    ? "text-secondary"
-                    : "text-muted-foreground"
+                  "flex flex-col items-center justify-center gap-0.5 py-1.5 px-2 rounded-lg transition-all duration-300",
+                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 )}
               >
                 <div
                   className={cn(
-                    "w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300",
-                    isActive
-                      ? "bg-primary scale-110"
-                      : "bg-transparent"
+                    "w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300",
+                    isActive ? "bg-primary scale-110" : "bg-transparent"
                   )}
                   style={{
                     boxShadow: isActive
-                      ? "0 2px 8px hsla(45, 100%, 51%, 0.4)"
+                      ? "0 2px 6px hsla(45, 100%, 51%, 0.35)"
                       : undefined,
                   }}
                 >
-                  <Icon
-                    className={cn(
-                      "w-4 h-4 transition-colors duration-300",
-                      isActive ? "text-secondary" : "text-muted-foreground"
-                    )}
-                  />
+                  <span className={cn(
+                    "text-sm transition-transform duration-300",
+                    isActive ? "scale-105" : "grayscale-[30%]"
+                  )}>
+                    {section.emoji}
+                  </span>
                 </div>
                 <span
                   className={cn(
-                    "text-[10px] font-medium transition-colors duration-300",
+                    "text-[9px] font-medium transition-colors duration-300",
                     isActive ? "text-primary" : "text-muted-foreground"
                   )}
                 >
-                  {section.label.split(" ")[0]}
+                  {section.label}
                 </span>
               </button>
             );
           })}
         </div>
-        {/* Safe area for iOS */}
         <div className="h-safe-area-inset-bottom bg-card" />
       </nav>
     </>
