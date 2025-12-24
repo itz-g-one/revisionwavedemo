@@ -17,11 +17,13 @@ export function ServiceCard({ icon, title, description, illustration }: ServiceC
   return (
     <div className="bg-card rounded-2xl overflow-hidden card-hover group cursor-pointer border border-border hover:border-primary/30 transition-all">
       {illustration && (
-        <div className="relative h-52 overflow-hidden bg-muted/30 flex items-center justify-center p-4">
+        <div className="relative h-52 overflow-hidden flex items-center justify-center p-4">
+          {/* Subtle glow effect */}
+          <div className="absolute inset-0 bg-gradient-radial from-primary/10 via-transparent to-transparent opacity-50 group-hover:opacity-80 transition-opacity duration-500" />
           <img 
             src={illustration} 
             alt={title} 
-            className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+            className="relative z-10 w-full h-full object-contain drop-shadow-lg group-hover:scale-105 transition-transform duration-500"
           />
         </div>
       )}

@@ -28,18 +28,14 @@ export function EnhancedServiceCard({
       
       {/* Illustration container */}
       {illustration && (
-        <div className="relative h-48 sm:h-52 overflow-hidden bg-gradient-to-br from-off-white via-background to-muted/50 flex items-center justify-center p-6">
-          {/* Soft circular glow behind image */}
-          <div className="absolute inset-8 rounded-full bg-gradient-to-br from-primary/15 via-primary/5 to-transparent opacity-70 group-hover:opacity-100 group-hover:scale-125 transition-all duration-700" />
-          
-          {/* Corner accents */}
-          <div className="absolute top-3 left-3 w-8 h-8 border-l-2 border-t-2 border-primary/20 rounded-tl-lg opacity-0 group-hover:opacity-100 transition-opacity" />
-          <div className="absolute bottom-3 right-3 w-8 h-8 border-r-2 border-b-2 border-primary/20 rounded-br-lg opacity-0 group-hover:opacity-100 transition-opacity" />
+        <div className="relative h-48 sm:h-52 overflow-hidden flex items-center justify-center p-4">
+          {/* Subtle radial glow */}
+          <div className="absolute inset-0 bg-gradient-radial from-primary/10 via-transparent to-transparent opacity-50 group-hover:opacity-80 transition-opacity duration-500" />
           
           <img 
             src={illustration} 
             alt={title} 
-            className="relative z-10 w-full h-full object-contain drop-shadow-lg group-hover:scale-110 group-hover:drop-shadow-2xl transition-all duration-500"
+            className="relative z-10 w-full h-full object-contain drop-shadow-xl group-hover:scale-110 transition-all duration-500"
           />
         </div>
       )}
