@@ -279,11 +279,11 @@ export default function Index() {
           </AnimatedSection>
 
           <StaggeredChildren className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6" animation="scale" staggerDelay={100}>
-            {brandingSteps.map((step, index) => <div key={index} className="group bg-card rounded-2xl p-6 text-center card-hover border border-border relative overflow-hidden">
+            {brandingSteps.map((step, index) => <div key={index} className="group bg-card rounded-2xl p-6 text-center card-hover border border-border relative overflow-hidden h-full min-h-[200px] flex flex-col">
                 {/* Hover gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 
-                <div className="relative z-10">
+                <div className="relative z-10 flex flex-col flex-1">
                   {/* Large step number */}
                   <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-primary text-primary-foreground text-sm font-bold flex items-center justify-center shadow-lg">
                     {index + 1}
@@ -295,7 +295,7 @@ export default function Index() {
                   </div>
                   
                   <h3 className="font-bold text-foreground mb-2 group-hover:text-primary transition-colors">{step.title}</h3>
-                  <p className="text-muted-foreground text-sm">{step.description}</p>
+                  <p className="text-muted-foreground text-sm flex-1">{step.description}</p>
                 </div>
 
                 {/* Connection line - dashed */}
