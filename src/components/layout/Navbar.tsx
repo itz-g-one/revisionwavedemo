@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import revisionWaveLogo from "@/assets/revision-wave-logo.png";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -22,11 +23,12 @@ export function Navbar() {
           className="flex items-center justify-between h-12 px-3 md:px-5 rounded-full bg-secondary/80 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] border border-secondary-foreground/5"
         >
           {/* Left - Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_0_12px_hsl(var(--primary)/0.4)] group-hover:shadow-[0_0_20px_hsl(var(--primary)/0.6)] transition-all duration-300">
-              <span className="text-primary-foreground font-bold text-sm">R</span>
-            </div>
-            <span className="text-sm font-bold text-secondary-foreground tracking-tight">Revision<span className="text-primary">.</span></span>
+          <Link to="/" className="flex items-center group">
+            <img 
+              src={revisionWaveLogo} 
+              alt="Revision Wave" 
+              className="w-10 h-10 rounded-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
           </Link>
 
           {/* Center - Navigation Links */}
