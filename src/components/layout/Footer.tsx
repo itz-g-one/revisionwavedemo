@@ -143,13 +143,13 @@ export function Footer() {
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="w-9 h-9 sm:w-8 sm:h-8 rounded-full bg-foreground text-background flex items-center justify-center hover:bg-primary active:bg-primary transition-colors"
+                  className="w-9 h-9 sm:w-8 sm:h-8 rounded-full bg-foreground text-background flex items-center justify-center hover:bg-primary hover:scale-110 hover:shadow-[0_0_15px_hsl(var(--primary)/0.4)] active:bg-primary transition-all duration-300"
                 >
                   <social.icon className="w-4 h-4" />
                 </a>
               ))}
             </div>
-            <p className="text-muted-foreground text-xs sm:text-sm text-center order-2 sm:order-1">
+            <p className="text-foreground/70 text-xs sm:text-sm text-center order-2 sm:order-1">
               ©{new Date().getFullYear()} Revision Wave. All rights reserved.
             </p>
           </div>

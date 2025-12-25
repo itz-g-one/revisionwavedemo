@@ -9,11 +9,14 @@ const faqs = [{
   question: "How does AI-powered personal branding work?",
   answer: "Our AI-powered personal branding system follows a 5-step process: Trend Research to identify what's working, Script Creation using AI, Avatar & AI Voice generation, Professional Editing, and Auto Publishing. This creates a consistent content pipeline with minimal effort on your part."
 }, {
+  question: "Is AI-generated content safe for brands?",
+  answer: "Absolutely. We use AI as a tool to enhance your authentic voice, not replace it. All content goes through quality checks and maintains your brand's tone and values. Our AI systems are trained on best practices and constantly refined to deliver brand-safe, engaging content."
+}, {
+  question: "How long before I see results?",
+  answer: "Most clients see initial engagement improvements within 2-4 weeks. Full system optimization typically shows significant growth metrics by week 6-8. We track everything and provide transparent reporting so you know exactly what's working."
+}, {
   question: "What is your typical project timeline?",
   answer: "Timelines vary based on project scope. Simple campaigns can launch in 1-2 weeks, while comprehensive branding and automation systems typically take 4-6 weeks. We'll provide a detailed timeline during our initial consultation."
-}, {
-  question: "How do you use AI in your services?",
-  answer: "We leverage AI across all our services - from content generation and video editing to analytics and automation. This allows us to deliver faster results, reduce costs, and provide insights that wouldn't be possible with traditional methods alone."
 }, {
   question: "What industries do you work with?",
   answer: "We work with creators, coaches, consultants, and growing businesses across various industries. Our AI-powered approach adapts to different niches while maintaining the personal touch that makes brands memorable."
@@ -46,11 +49,11 @@ export function FAQSection() {
             </h2>
 
             <Accordion type="single" collapsible className="space-y-3">
-              {faqs.map((faq, index) => <AccordionItem key={index} value={`item-${index}`} className="border-l-4 border-l-primary/40 border-y-0 border-r-0 bg-card rounded-none px-0 data-[state=open]:border-l-primary">
-                  <AccordionTrigger className="text-left font-medium py-4 px-5 hover:no-underline text-foreground hover:text-primary transition-colors [&[data-state=open]>svg]:rotate-45 [&>svg]:transition-transform">
+              {faqs.map((faq, index) => <AccordionItem key={index} value={`item-${index}`} className="border-l-4 border-l-border border-y-0 border-r-0 bg-card rounded-none px-0 data-[state=open]:border-l-primary data-[state=open]:bg-primary/5 transition-all duration-300">
+                  <AccordionTrigger className="text-left font-semibold py-5 px-5 hover:no-underline text-foreground hover:text-primary transition-all duration-300 [&[data-state=open]>svg]:rotate-45 [&[data-state=open]]:text-primary [&>svg]:transition-transform">
                     <span className="text-base pr-4">{faq.question}</span>
                   </AccordionTrigger>
-                  <AccordionContent className="px-5 pb-4 pt-0">
+                  <AccordionContent className="px-5 pb-5 pt-0">
                     <p className="text-sm leading-relaxed text-muted-foreground">
                       {faq.answer}
                     </p>
