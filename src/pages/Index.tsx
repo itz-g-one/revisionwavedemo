@@ -279,31 +279,35 @@ export default function Index() {
             </p>
           </AnimatedSection>
 
-          <StaggeredChildren className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6 relative" animation="scale" staggerDelay={100}>
+          <div className="relative">
             {/* Connection line across all steps */}
             <div className="hidden lg:block absolute top-[100px] left-[10%] right-[10%] h-0.5 bg-gradient-to-r from-transparent via-primary/30 to-transparent z-0" />
             
-            {brandingSteps.map((step, index) => <div key={index} className="group bg-card rounded-2xl p-6 text-center card-hover border border-border relative overflow-hidden h-full min-h-[220px] flex flex-col z-10">
-                {/* Hover gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                
-                <div className="relative z-10 flex flex-col flex-1">
-                  {/* Large step number with animation */}
-                  <div className="absolute -top-2 -right-2 w-9 h-9 rounded-full bg-primary text-primary-foreground text-sm font-bold flex items-center justify-center shadow-[0_0_15px_hsl(var(--primary)/0.4)] group-hover:scale-110 group-hover:shadow-[0_0_25px_hsl(var(--primary)/0.6)] transition-all duration-300">
-                    {index + 1}
-                  </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+              {brandingSteps.map((step, index) => (
+                <div key={index} className="group bg-card rounded-2xl p-6 text-center card-hover border border-border relative overflow-hidden z-10">
+                  {/* Hover gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   
-                  {/* Enhanced icon with gradient background */}
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:from-primary/30 group-hover:to-primary/20 transition-all group-hover:scale-110 duration-300 shadow-md">
-                    <step.icon className="w-7 h-7 text-primary" />
+                  <div className="relative z-10">
+                    {/* Large step number with animation */}
+                    <div className="absolute -top-2 -right-2 w-9 h-9 rounded-full bg-primary text-primary-foreground text-sm font-bold flex items-center justify-center shadow-[0_0_15px_hsl(var(--primary)/0.4)] group-hover:scale-110 group-hover:shadow-[0_0_25px_hsl(var(--primary)/0.6)] transition-all duration-300">
+                      {index + 1}
+                    </div>
+                    
+                    {/* Enhanced icon with gradient background */}
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:from-primary/30 group-hover:to-primary/20 transition-all group-hover:scale-110 duration-300 shadow-md">
+                      <step.icon className="w-7 h-7 text-primary" />
+                    </div>
+                    
+                    <h3 className="font-bold text-foreground mb-1 group-hover:text-primary transition-colors text-base">{step.title}</h3>
+                    <p className="text-muted-foreground text-sm mb-2">{step.description}</p>
+                    <p className="text-primary text-xs font-semibold">{step.subtext}</p>
                   </div>
-                  
-                  <h3 className="font-bold text-foreground mb-1 group-hover:text-primary transition-colors text-base">{step.title}</h3>
-                  <p className="text-muted-foreground text-sm mb-2">{step.description}</p>
-                  <p className="text-primary text-xs font-semibold mt-auto">{step.subtext}</p>
                 </div>
-              </div>)}
-          </StaggeredChildren>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
