@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Star, ArrowRight, Search, FileText, User, Video, Upload, Zap, Sparkles, Target, Users, ChevronDown, Trophy, Rocket, ThumbsUp, Lightbulb, BarChart3 } from "lucide-react";
+import { Star, ArrowRight, Search, FileText, User, Video, Upload, Zap, Sparkles, Target, Users, ChevronDown, Rocket, Lightbulb, BarChart3, Shield, Award } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { EnhancedServiceCard, enhancedServices } from "@/components/services/EnhancedServiceCard";
@@ -16,62 +16,52 @@ import heroIllustration from "@/assets/hero-illustration.png";
 const brandingSteps = [{
   icon: Search,
   title: "Trend Research",
-  description: "AI analyzes what's trending in your niche"
+  description: "AI analyzes what's trending in your niche",
+  subtext: "Know what works before you create"
 }, {
   icon: FileText,
   title: "Script Creation",
-  description: "Generate engaging scripts automatically"
+  description: "Generate engaging scripts automatically",
+  subtext: "Hooks that stop the scroll"
 }, {
   icon: User,
   title: "Avatar & AI Voice",
-  description: "Create your digital persona"
+  description: "Create your digital persona",
+  subtext: "Your clone, your style"
 }, {
   icon: Video,
   title: "Professional Editing",
-  description: "Polished, platform-ready content"
+  description: "Polished, platform-ready content",
+  subtext: "Studio quality, automated"
 }, {
   icon: Upload,
   title: "Auto Publishing",
-  description: "Schedule and publish automatically"
+  description: "Schedule and publish automatically",
+  subtext: "Set it and scale it"
 }];
 const whyUsCards = [{
   icon: Zap,
-  title: "Automation-First Systems",
-  description: "Reduce manual work by 80% with smart automation"
+  title: "Built to Remove Manual Work",
+  description: "We eliminate 80% of your repetitive tasks. Not more tools—less friction."
 }, {
   icon: Sparkles,
-  title: "AI-Driven Growth",
-  description: "Leverage cutting-edge AI for faster results"
+  title: "AI That Actually Delivers",
+  description: "No gimmicks. Real AI systems that produce measurable results in weeks."
 }, {
   icon: Target,
-  title: "Creator-Focused Execution",
-  description: "Strategies tailored for personal brands"
+  title: "Creator-First, Always",
+  description: "Your brand, your voice, your growth. We build systems around you."
 }, {
   icon: Users,
-  title: "End-to-End Delivery",
-  description: "From strategy to execution, we handle it all"
+  title: "One Partner, Full Stack",
+  description: "Strategy to execution—no handoffs, no gaps, no excuses."
 }];
-const stats = [{
-  value: 150,
-  suffix: "+",
-  label: "Projects Completed",
-  icon: Trophy
-}, {
-  value: 98,
-  suffix: "%",
-  label: "Client Satisfaction",
-  icon: ThumbsUp
-}, {
-  value: 50,
-  suffix: "+",
-  label: "Happy Clients",
-  icon: Users
-}, {
-  value: 5,
-  suffix: "x",
-  label: "Average ROI",
-  icon: Rocket
-}];
+// Value-focused proof points
+const proofPoints = [
+  { icon: Zap, text: "AI-Powered Systems" },
+  { icon: Target, text: "Creator-Focused" },
+  { icon: Rocket, text: "Results-Driven" },
+];
 export default function Index() {
   return <div className="min-h-screen bg-background overflow-hidden">
       <Navbar />
@@ -138,19 +128,17 @@ export default function Index() {
                 </Button>
               </div>
 
-              {/* Enhanced Stats Row with icons and hover effects */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8 border-t border-border">
-                {stats.map((stat, index) => <div key={index} className="group text-center sm:text-left p-3 rounded-xl hover:bg-card hover:shadow-md transition-all duration-300 cursor-default">
-                    <div className="flex items-center gap-2 mb-1">
-                      <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                        <stat.icon className="w-4 h-4 text-primary" />
-                      </div>
-                      <div className="text-2xl md:text-3xl font-bold text-primary">
-                        <AnimatedCounter end={stat.value} suffix={stat.suffix} />
-                      </div>
+              {/* Value-based proof line instead of weak metrics */}
+              <div className="pt-8 border-t border-border/50">
+                <p className="text-sm text-muted-foreground mb-4 font-medium">AI-powered systems built for:</p>
+                <div className="flex flex-wrap gap-3">
+                  {proofPoints.map((point, index) => (
+                    <div key={index} className="group flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border/50 hover:border-primary/50 hover:bg-primary/5 transition-all duration-300 cursor-default">
+                      <point.icon className="w-4 h-4 text-primary" />
+                      <span className="text-sm font-medium text-foreground">{point.text}</span>
                     </div>
-                    <div className="text-xs sm:text-sm text-muted-foreground ml-10 sm:ml-0">{stat.label}</div>
-                  </div>)}
+                  ))}
+                </div>
               </div>
             </AnimatedSection>
 
@@ -202,22 +190,24 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Trust Strip - Enhanced */}
+      {/* Trust Anchor Strip */}
       <AnimatedSection animation="fade">
-        <section className="py-8 bg-secondary relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/95 to-secondary" />
-          {/* Subtle animated shine */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent animate-shimmer-horizontal" />
+        <section className="py-6 bg-card border-y border-border/50 relative overflow-hidden">
           <div className="container-wide relative z-10">
-            <div className="flex flex-wrap items-center justify-center gap-6 text-secondary-foreground">
-              <div className="flex gap-1.5">
-                {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-primary text-primary drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]" style={{
-                animationDelay: `${i * 150}ms`
-              }} />)}
+            <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8 text-foreground">
+              <div className="flex items-center gap-2">
+                <Shield className="w-5 h-5 text-primary" />
+                <span className="text-sm font-medium">Built by Creators & AI Specialists</span>
               </div>
-              <span className="text-sm font-medium tracking-wide">
-                Trusted by <span className="text-primary font-bold">500+</span> creators, coaches, and growing businesses worldwide
-              </span>
+              <div className="hidden md:block w-px h-5 bg-border" />
+              <div className="flex items-center gap-2">
+                <Award className="w-5 h-5 text-primary" />
+                <span className="text-sm font-medium">Results-Driven Systems</span>
+              </div>
+              <div className="hidden md:block w-px h-5 bg-border" />
+              <div className="flex gap-1.5">
+                {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-primary text-primary" />)}
+              </div>
             </div>
           </div>
         </section>
@@ -289,14 +279,17 @@ export default function Index() {
             </p>
           </AnimatedSection>
 
-          <StaggeredChildren className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6" animation="scale" staggerDelay={100}>
-            {brandingSteps.map((step, index) => <div key={index} className="group bg-card rounded-2xl p-6 text-center card-hover border border-border relative overflow-hidden h-full min-h-[200px] flex flex-col">
+          <StaggeredChildren className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6 relative" animation="scale" staggerDelay={100}>
+            {/* Connection line across all steps */}
+            <div className="hidden lg:block absolute top-[100px] left-[10%] right-[10%] h-0.5 bg-gradient-to-r from-transparent via-primary/30 to-transparent z-0" />
+            
+            {brandingSteps.map((step, index) => <div key={index} className="group bg-card rounded-2xl p-6 text-center card-hover border border-border relative overflow-hidden h-full min-h-[220px] flex flex-col z-10">
                 {/* Hover gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 
                 <div className="relative z-10 flex flex-col flex-1">
-                  {/* Large step number */}
-                  <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-primary text-primary-foreground text-sm font-bold flex items-center justify-center shadow-lg">
+                  {/* Large step number with animation */}
+                  <div className="absolute -top-2 -right-2 w-9 h-9 rounded-full bg-primary text-primary-foreground text-sm font-bold flex items-center justify-center shadow-[0_0_15px_hsl(var(--primary)/0.4)] group-hover:scale-110 group-hover:shadow-[0_0_25px_hsl(var(--primary)/0.6)] transition-all duration-300">
                     {index + 1}
                   </div>
                   
@@ -305,12 +298,10 @@ export default function Index() {
                     <step.icon className="w-7 h-7 text-primary" />
                   </div>
                   
-                  <h3 className="font-bold text-foreground mb-2 group-hover:text-primary transition-colors">{step.title}</h3>
-                  <p className="text-muted-foreground text-sm flex-1">{step.description}</p>
+                  <h3 className="font-bold text-foreground mb-1 group-hover:text-primary transition-colors text-base">{step.title}</h3>
+                  <p className="text-muted-foreground text-sm mb-2">{step.description}</p>
+                  <p className="text-primary text-xs font-semibold mt-auto">{step.subtext}</p>
                 </div>
-
-                {/* Connection line - dashed */}
-                {index < brandingSteps.length - 1 && <div className="hidden lg:block absolute top-1/2 -right-3 w-6 border-t-2 border-dashed border-primary/40" />}
               </div>)}
           </StaggeredChildren>
         </div>

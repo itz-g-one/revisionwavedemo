@@ -12,6 +12,7 @@ interface EnhancedServiceCardProps {
   description: string;
   illustration?: string;
   accentColor?: string;
+  featured?: boolean;
 }
 
 export function EnhancedServiceCard({ 
@@ -19,9 +20,17 @@ export function EnhancedServiceCard({
   title, 
   description, 
   illustration,
+  featured,
 }: EnhancedServiceCardProps) {
   return (
-    <div className="group relative bg-card rounded-3xl overflow-hidden cursor-pointer border border-border/50 hover:border-primary/60 transition-all duration-500 hover:-translate-y-4 h-full flex flex-col neon-border">
+    <div className={`group relative bg-card rounded-3xl overflow-hidden cursor-pointer border transition-all duration-500 hover:-translate-y-4 h-full flex flex-col neon-border ${featured ? 'border-primary/60 shadow-[0_0_30px_hsl(var(--primary)/0.2)]' : 'border-border/50 hover:border-primary/60'}`}>
+      {/* Featured badge */}
+      {featured && (
+        <div className="absolute top-4 right-4 z-20 px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-bold shadow-[0_0_15px_hsl(var(--primary)/0.4)]">
+          Most Popular
+        </div>
+      )}
+      
       {/* Animated gradient border on hover */}
       <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/20 via-transparent to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
       
@@ -129,5 +138,6 @@ export const enhancedServices = [
     description: "Build your personal brand with AI-generated content, avatars, and automated publishing.",
     illustration: serviceBranding,
     accentColor: "#ec4899",
+    featured: true,
   },
 ];

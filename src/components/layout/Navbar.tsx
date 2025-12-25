@@ -22,28 +22,28 @@ export function Navbar() {
           className="flex items-center justify-between h-12 px-3 md:px-5 rounded-full bg-secondary/80 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] border border-secondary-foreground/5"
         >
           {/* Left - Logo */}
-          <Link to="/" className="flex items-center gap-1.5">
-            <div className="w-7 h-7 rounded-full bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-xs">R</span>
+          <Link to="/" className="flex items-center gap-2 group">
+            <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_0_12px_hsl(var(--primary)/0.4)] group-hover:shadow-[0_0_20px_hsl(var(--primary)/0.6)] transition-all duration-300">
+              <span className="text-primary-foreground font-bold text-sm">R</span>
             </div>
-            <span className="text-xs font-semibold text-secondary-foreground tracking-tight">Revision.</span>
+            <span className="text-sm font-bold text-secondary-foreground tracking-tight">Revision<span className="text-primary">.</span></span>
           </Link>
 
           {/* Center - Navigation Links */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-5">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-xs font-medium transition-all duration-300 ease-out relative ${
+                className={`text-xs font-medium transition-all duration-300 ease-out relative py-1 ${
                   location.pathname === link.path
                     ? "text-primary"
-                    : "text-secondary-foreground/80 hover:text-secondary-foreground"
+                    : "text-secondary-foreground/80 hover:text-primary"
                 }`}
               >
                 {link.name}
                 {location.pathname === link.path && (
-                  <span className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-primary rounded-full" />
+                  <span className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-primary rounded-full shadow-[0_0_8px_hsl(var(--primary)/0.6)]" />
                 )}
               </Link>
             ))}
@@ -52,7 +52,7 @@ export function Navbar() {
           {/* Right - CTA Button */}
           <div className="hidden lg:block">
             <Button 
-              className="rounded-full px-3 h-7 bg-primary text-primary-foreground font-medium text-xs hover:bg-primary/90 transition-all duration-300 ease-out hover:scale-[1.02] shadow-none border-none" 
+              className="rounded-full px-4 h-8 bg-primary text-primary-foreground font-semibold text-xs hover:bg-primary/90 transition-all duration-300 ease-out hover:scale-105 shadow-[0_0_15px_hsl(var(--primary)/0.3)] hover:shadow-[0_0_25px_hsl(var(--primary)/0.5)] border-none" 
               asChild
             >
               <Link to="/contact">Contact Us</Link>
