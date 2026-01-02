@@ -67,7 +67,7 @@ export function VerticalSidebarNav() {
         )}
         aria-label="Section navigation"
       >
-        <div className="bg-secondary/95 backdrop-blur-md rounded-full p-1 shadow-[0_4px_20px_rgba(0,0,0,0.15)]">
+        <div className="bg-secondary/95 rounded-full p-1 shadow-lg">
           <div className="flex flex-col gap-0.5">
             {sections.map((section) => {
               const isActive = activeSection === section.id;
@@ -112,9 +112,9 @@ export function VerticalSidebarNav() {
       <nav
         className={cn(
           "fixed bottom-0 left-0 right-0 z-40 md:hidden",
-          "bg-secondary/98 backdrop-blur-md"
+          "bg-secondary"
         )}
-        style={{ boxShadow: "0 -2px 16px rgba(0,0,0,0.12)" }}
+        style={{ boxShadow: "0 -2px 12px rgba(0,0,0,0.1)" }}
         aria-label="Mobile section navigation"
       >
         <div className="flex items-center justify-around h-12 px-1 max-w-md mx-auto">
