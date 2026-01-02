@@ -67,25 +67,25 @@ export default function Index() {
       <Navbar />
       <VerticalSidebarNav />
       
-      {/* Hero Section - Enhanced */}
+      {/* Hero Section - Optimized for performance */}
       <section id="hero" className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 section-padding overflow-hidden">
-        {/* Gradient mesh background */}
+        {/* Gradient mesh background - static, no animation */}
         <div className="absolute inset-0 gradient-mesh" />
         
-        {/* Animated gradient orb */}
-        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px] animate-morph opacity-60" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-accent/15 rounded-full blur-[100px] animate-morph opacity-40" style={{ animationDelay: '-4s' }} />
+        {/* Static gradient orbs - hidden on mobile for performance */}
+        <div className="hidden md:block absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-primary/10 rounded-full blur-3xl opacity-60" />
+        <div className="hidden md:block absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-accent/10 rounded-full blur-3xl opacity-40" />
         
-        {/* Background Effects */}
+        {/* Background Effects - optimized versions */}
         <GlowOrbs />
-        <FloatingParticles count={25} />
+        <FloatingParticles count={8} />
         
-        {/* Decorative shapes */}
-        <DecorativeShape variant="blob" size="lg" className="top-20 -right-20 opacity-40 animate-morph" />
-        <DecorativeShape variant="ring" size="md" className="bottom-40 -left-10 opacity-30 animate-spin-slow" />
+        {/* Decorative shapes - static, no animations */}
+        <DecorativeShape variant="blob" size="lg" className="top-20 -right-20 opacity-30" />
+        <DecorativeShape variant="ring" size="md" className="bottom-40 -left-10 opacity-20" />
         
-        {/* Animated grid pattern */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{
+        {/* Static grid pattern */}
+        <div className="absolute inset-0 opacity-[0.02] hidden md:block" style={{
         backgroundImage: `linear-gradient(hsl(var(--primary) / 0.1) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--primary) / 0.1) 1px, transparent 1px)`,
         backgroundSize: '60px 60px'
       }} />
@@ -145,38 +145,38 @@ export default function Index() {
             {/* Right Column - Enhanced Illustration */}
             <AnimatedSection animation="fade-right" delay={200}>
               <div className="relative">
-                {/* Glow effect behind character */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-primary/15 rounded-full blur-3xl"></div>
+                {/* Glow effect behind character - static, reduced blur */}
+                <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/10 rounded-full blur-2xl"></div>
                 
                 <div className="relative">
-                  {/* Floating icons around the character */}
+                  {/* Floating icons around the character - desktop only */}
                   <FloatingIcons />
                   
-                  {/* Floating tag badges */}
-                  <div className="absolute top-4 right-0 bg-card/90 backdrop-blur-sm rounded-xl shadow-lg px-4 py-2.5 animate-float border border-border/50 z-20">
+                  {/* Floating tag badges - static, no animations for mobile */}
+                  <div className="hidden md:block absolute top-4 right-0 bg-card/90 rounded-xl shadow-lg px-4 py-2.5 border border-border/50 z-20">
                     <span className="text-sm font-medium text-foreground flex items-center gap-2">
                       <Sparkles className="w-4 h-4 text-primary" />
                       AI Marketing
                     </span>
                   </div>
-                  <div className="absolute bottom-32 -left-4 bg-secondary text-secondary-foreground rounded-xl shadow-lg px-4 py-2.5 animate-float-delayed z-20">
+                  <div className="hidden md:block absolute bottom-32 -left-4 bg-secondary text-secondary-foreground rounded-xl shadow-lg px-4 py-2.5 z-20">
                     <span className="text-sm font-medium flex items-center gap-2">
                       <Rocket className="w-4 h-4" />
                       Growth Expert
                     </span>
                   </div>
-                  <div className="absolute bottom-12 right-4 bg-primary text-primary-foreground rounded-xl shadow-lg px-4 py-2.5 animate-bounce-subtle z-20">
+                  <div className="hidden md:block absolute bottom-12 right-4 bg-primary text-primary-foreground rounded-xl shadow-lg px-4 py-2.5 z-20">
                     <span className="text-sm font-medium flex items-center gap-2">
                       <Lightbulb className="w-4 h-4" />
                       Creative
                     </span>
                   </div>
                   
-                  {/* Character shadow */}
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-6 bg-foreground/8 blur-xl rounded-full" />
+                  {/* Character shadow - simplified */}
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-4 bg-foreground/5 blur-lg rounded-full" />
                   
-                  {/* Hero illustration */}
-                  <img alt="AI Marketing Professional helping grow your business" className="w-full max-w-md mx-auto lg:max-w-lg drop-shadow-xl relative z-10" src={heroIllustration} />
+                  {/* Hero illustration - optimized loading */}
+                  <img alt="AI Marketing Professional helping grow your business" className="w-full max-w-md mx-auto lg:max-w-lg drop-shadow-lg relative z-10" src={heroIllustration} loading="eager" decoding="async" />
                 </div>
               </div>
             </AnimatedSection>
@@ -230,9 +230,9 @@ export default function Index() {
 
       {/* Enhanced Services Section */}
       <section id="services" className="section-padding relative">
-        <FloatingParticles count={10} className="opacity-50" />
-        <DecorativeShape variant="circle" size="lg" className="-top-20 -right-20 opacity-20" />
-        <DecorativeShape variant="blob" size="md" className="bottom-0 -left-20 opacity-15" />
+        <FloatingParticles count={6} className="opacity-30" />
+        <DecorativeShape variant="circle" size="lg" className="-top-20 -right-20 opacity-15" />
+        <DecorativeShape variant="blob" size="md" className="bottom-0 -left-20 opacity-10" />
         
         <div className="container-wide relative z-10">
           <AnimatedSection className="text-center mb-16">
@@ -311,10 +311,10 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Why Revision Wave - Enhanced */}
+      {/* Why Revision Wave - Optimized */}
       <section id="why-us" className="section-padding relative">
         <GlowOrbs />
-        <DecorativeShape variant="blob" size="lg" className="-bottom-20 -right-20 opacity-20" />
+        <DecorativeShape variant="blob" size="lg" className="-bottom-20 -right-20 opacity-15" />
         
         <div className="container-wide relative z-10">
           <AnimatedSection className="text-center mb-16">

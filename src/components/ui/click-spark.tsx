@@ -88,6 +88,7 @@ export function ClickSpark({
     if (!ctx) return;
 
     let animationId: number;
+    let isAnimating = false;
 
     const draw = (timestamp: number) => {
       if (!startTimeRef.current) {
@@ -124,10 +125,21 @@ export function ClickSpark({
         return true;
       });
 
-      animationId = requestAnimationFrame(draw);
+      // Only continue animating if there are sparks to draw
+      if (sparksRef.current.length > 0) {
+        animationId = requestAnimationFrame(draw);
+      } else {
+        isAnimating = false;
+      }
     };
 
-    animationId = requestAnimationFrame(draw);
+    // Store the start function so click handler can trigger it
+    (canvasRef.current as any).__startAnimation = () => {
+      if (!isAnimating) {
+        isAnimating = true;
+        animationId = requestAnimationFrame(draw);
+      }
+    };
 
     return () => {
       cancelAnimationFrame(animationId);
@@ -151,6 +163,9 @@ export function ClickSpark({
     }));
 
     sparksRef.current.push(...newSparks);
+    
+    // Trigger animation loop only when there are sparks
+    (canvas as any).__startAnimation?.();
   };
 
   return (

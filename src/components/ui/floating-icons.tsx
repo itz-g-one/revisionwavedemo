@@ -1,35 +1,29 @@
-import { Laptop, BarChart3, Lightbulb, Star, Sparkles, Zap, Rocket, Heart } from "lucide-react";
+import { Laptop, BarChart3, Lightbulb, Star, Sparkles, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface FloatingIconProps {
   className?: string;
 }
 
+// Reduced icons for better performance
 const icons = [
-  { Icon: Laptop, position: "top-4 -left-4", delay: "0s", duration: "4s" },
-  { Icon: BarChart3, position: "top-8 -right-8", delay: "1s", duration: "5s" },
-  { Icon: Lightbulb, position: "-bottom-4 left-8", delay: "0.5s", duration: "4.5s" },
-  { Icon: Star, position: "top-1/3 -left-12", delay: "1.5s", duration: "3.5s" },
-  { Icon: Sparkles, position: "bottom-1/4 -right-6", delay: "0.8s", duration: "4.2s" },
-  { Icon: Zap, position: "top-1/4 right-4", delay: "2s", duration: "3.8s" },
+  { Icon: Laptop, position: "top-4 -left-4" },
+  { Icon: BarChart3, position: "top-8 -right-8" },
+  { Icon: Sparkles, position: "bottom-1/4 -right-6" },
 ];
 
 export function FloatingIcons({ className }: FloatingIconProps) {
   return (
     <>
-      {icons.map(({ Icon, position, delay, duration }, index) => (
+      {icons.map(({ Icon, position }, index) => (
         <div
           key={index}
           className={cn(
-            "absolute w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center backdrop-blur-sm border border-primary/20",
-            "animate-float opacity-80",
+            "absolute w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20",
+            "opacity-80 hidden md:flex",
             position,
             className
           )}
-          style={{
-            animationDelay: delay,
-            animationDuration: duration,
-          }}
         >
           <Icon className="w-5 h-5 text-primary" />
         </div>
@@ -43,18 +37,29 @@ interface DecorativeDotsProps {
   className?: string;
 }
 
-export function DecorativeDots({ count = 20, className }: DecorativeDotsProps) {
+// Reduced dots count and hidden on mobile
+export function DecorativeDots({ count = 10, className }: DecorativeDotsProps) {
+  // Pre-compute positions for consistency
+  const positions = [
+    { left: '15%', top: '20%' },
+    { left: '35%', top: '45%' },
+    { left: '55%', top: '15%' },
+    { left: '75%', top: '60%' },
+    { left: '25%', top: '80%' },
+    { left: '85%', top: '35%' },
+    { left: '10%', top: '55%' },
+    { left: '65%', top: '85%' },
+    { left: '45%', top: '70%' },
+    { left: '90%', top: '10%' },
+  ];
+  
   return (
-    <div className={cn("absolute inset-0 overflow-hidden pointer-events-none", className)}>
-      {Array.from({ length: count }).map((_, i) => (
+    <div className={cn("absolute inset-0 overflow-hidden pointer-events-none hidden md:block", className)}>
+      {positions.slice(0, count).map((pos, i) => (
         <div
           key={i}
-          className="absolute w-1.5 h-1.5 rounded-full bg-primary/20"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 2}s`,
-          }}
+          className="absolute w-1.5 h-1.5 rounded-full bg-primary/15"
+          style={pos}
         />
       ))}
     </div>
@@ -75,7 +80,7 @@ export function DecorativeShape({ variant = "circle", className, size = "md" }: 
   };
 
   const baseClasses = cn(
-    "absolute pointer-events-none",
+    "absolute pointer-events-none hidden md:block",
     sizeClasses[size],
     className
   );
@@ -92,10 +97,7 @@ export function DecorativeShape({ variant = "circle", className, size = "md" }: 
 
   return (
     <div
-      className={cn(baseClasses, "bg-primary/5")}
-      style={{
-        borderRadius: "60% 40% 30% 70% / 60% 30% 70% 40%",
-      }}
+      className={cn(baseClasses, "bg-primary/5 rounded-[40%_60%_60%_40%/60%_40%_60%_40%]")}
     />
   );
 }

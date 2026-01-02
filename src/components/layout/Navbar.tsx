@@ -20,14 +20,15 @@ export function Navbar() {
     <header className="fixed top-4 left-0 right-0 z-50 px-4">
       <div className="max-w-2xl mx-auto">
         <nav 
-          className="flex items-center justify-between h-12 px-3 md:px-5 rounded-full bg-secondary/80 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] border border-secondary-foreground/5"
+          className="flex items-center justify-between h-12 px-3 md:px-5 rounded-full bg-secondary/95 md:bg-secondary/80 md:backdrop-blur-lg shadow-lg md:shadow-[0_4px_30px_rgba(0,0,0,0.1)] border border-secondary-foreground/5"
         >
           {/* Left - Logo */}
-          <Link to="/" className="flex items-center group">
+          <Link to="/" className="flex items-center">
             <img 
               src={revisionWaveLogo} 
               alt="Revision Wave" 
-              className="w-10 h-10 rounded-full object-cover group-hover:scale-105 transition-transform duration-300"
+              className="w-10 h-10 rounded-full object-cover"
+              loading="eager"
             />
           </Link>
 
